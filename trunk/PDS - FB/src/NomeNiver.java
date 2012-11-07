@@ -1,5 +1,4 @@
 import java.util.List;
-import com.restfb.types.User;
 
 public class NomeNiver {
 
@@ -7,16 +6,16 @@ public class NomeNiver {
 
 		String name = "felipecordeiroalves";
 
-		BuscarInfoUsuario usuario = new BuscarInfoUsuario();
+		Usuario usuario = new Usuario();
 		ListaIDs listaIDs = new ListaIDs();
 
 		List<String> lista = listaIDs.buscarIDs(name);
 
-		User user;
+		String niver;
 
 		for (int i = 0; i < lista.size(); i++) {
-			user = usuario.buscarInfoUsuario(lista.get(i));
-			System.out.println(user.getBirthday());
+			niver = usuario.getBirthday((lista.get(i)));
+			System.out.println(niver);
 		}
 
 	}
