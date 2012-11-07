@@ -1,16 +1,21 @@
-import com.restfb.types.User;
-
 public class Usuario implements IUsuario {
 
-	BuscarInfoUsuario buscar = new BuscarInfoUsuario();
-	User user;
-	
+	BuscarUsuario buscar = new BuscarUsuario();
+
 	public String getBirthday(String name) {
 		return buscar.getUser(name).getBirthday();
 	}
-	
+
 	public String getID(String name) {
 		return buscar.getUser(name).getId();
+	}
+
+	public String getEmail(String name) {
+		return buscar.getUser(name).getEmail();
+	}
+
+	public String getName(String name) {
+		return buscar.getUser(name).getName();
 	}
 
 }
