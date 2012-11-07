@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 import com.restfb.Connection;
 import com.restfb.types.User;
 
@@ -9,15 +12,19 @@ public class NomeNiver {
 
 		BuscarAmigos friends = new BuscarAmigos();
 
-		BuscarAmigosDeAmigos amigosdeamigos = new BuscarAmigosDeAmigos();
-
-		Connection<User> amigos = amigosdeamigos.buscarAmigosDeAmigos(
-				friends.buscarAmigos(name), "AnderShow Rodrigues");
-
+		Connection<User> amigos = friends.buscarAmigos(name);
+		List<User> usuarios = new ArrayList();
+		
 		for (int i = 0; i < amigos.getData().size(); i++) {
-			System.out.println(amigos.getData().get(i).getName());
-			System.out.println(amigos.getData().get(i).getBirthday());
+			User user = Cliente.getInstance().fetchObject(amigos.getData().get(i).getId(), User.class);
+			usuarios.add(user);
+		}
+		
+		for (int i = 0; i < usuarios.size(); i++) {
+			System.out.println(usuarios.get(i).getBirthday());
 		}
 
+
+		
 	}
 }
