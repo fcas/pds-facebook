@@ -1,7 +1,7 @@
 import com.restfb.Connection;
 import com.restfb.types.User;
 
-public class Teste {
+public class NomeNiver {
 
 	public static void main(String[] args) {
 
@@ -16,6 +16,7 @@ public class Teste {
 
 		for (int i = 0; i < amigos.getData().size(); i++) {
 			System.out.println(amigos.getData().get(i).getName());
+			System.out.println(amigos.getData().get(i).getBirthday());
 		}
 
 	}
