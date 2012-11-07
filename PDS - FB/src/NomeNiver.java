@@ -10,16 +10,14 @@ public class NomeNiver {
 		BuscarInfoUsuario usuario = new BuscarInfoUsuario();
 		ListaIDs listaIDs = new ListaIDs();
 
-		List<String> lista  = listaIDs.buscarIDs(name);
-		
+		List<String> lista = listaIDs.buscarIDs(name);
+
 		User user;
-		
+
 		for (int i = 0; i < lista.size(); i++) {
 			user = usuario.buscarInfoUsuario(lista.get(i));
 			System.out.println(user.getBirthday());
 		}
 
-
-		
 	}
 }
