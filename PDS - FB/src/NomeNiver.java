@@ -1,7 +1,4 @@
-import java.util.ArrayList;
 import java.util.List;
-
-import com.restfb.Connection;
 import com.restfb.types.User;
 
 public class NomeNiver {
@@ -10,18 +7,16 @@ public class NomeNiver {
 
 		String name = "felipecordeiroalves";
 
-		BuscarAmigos friends = new BuscarAmigos();
+		BuscarInfoUsuario usuario = new BuscarInfoUsuario();
+		ListaIDs listaIDs = new ListaIDs();
 
-		Connection<User> amigos = friends.buscarAmigos(name);
-		List<User> usuarios = new ArrayList();
+		List<String> lista  = listaIDs.buscarIDs(name);
 		
-		for (int i = 0; i < amigos.getData().size(); i++) {
-			User user = Cliente.getInstance().fetchObject(amigos.getData().get(i).getId(), User.class);
-			usuarios.add(user);
-		}
+		User user;
 		
-		for (int i = 0; i < usuarios.size(); i++) {
-			System.out.println(usuarios.get(i).getBirthday());
+		for (int i = 0; i < lista.size(); i++) {
+			user = usuario.buscarInfoUsuario(lista.get(i));
+			System.out.println(user.getBirthday());
 		}
 
 
