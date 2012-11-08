@@ -6,8 +6,8 @@ public class NomeNiver {
 
 		String name = "felipecordeiroalves";
 
-		Usuario usuario = new Usuario();
-		ListaIDs listaIDs = new ListaIDs();
+		IUsuario usuario = new Usuario();
+		IListaIDs listaIDs = new ListaIDs();
 
 		List<String> lista = listaIDs.buscarIDs(name);
 
