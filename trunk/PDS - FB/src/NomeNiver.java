@@ -25,6 +25,5 @@ public class NomeNiver {
 						.getListVertex().get(i - 1));
 			}
 		}
-
 	}
 }
