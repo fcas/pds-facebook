@@ -1,5 +1,7 @@
 package graph;
 
+import java.util.Enumeration;
+
 public interface Container extends Comparable{
 	int getCount ();
 	boolean isEmpty();

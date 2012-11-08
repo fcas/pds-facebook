@@ -4,7 +4,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-public class GraphAsList extends AbstractGraph {
+public class GraphAsList extends AbstractGraph3 {
 	private List<Edge>[] adjacencyList; 
 	
 	public GraphAsList(int size){ 
