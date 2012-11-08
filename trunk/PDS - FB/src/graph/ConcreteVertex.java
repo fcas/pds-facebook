@@ -1,77 +1,28 @@
 package graph;
 
-import java.util.Iterator;
+import java.util.LinkedList;
 
 public class ConcreteVertex implements Vertex {
-
-	private String aniversario; 
-	private String nome; 
-	private String ID;
+	private LinkedList<Vertex> listVertex = new LinkedList<Vertex>();
+	private String name;
+	private String birthday;
 	
-	public String getAniversario() {
-		return aniversario;
-	}
-
-	public void setAniversario(String aniversario) {
-		this.aniversario = aniversario;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
+	public ConcreteVertex (String name, String birthday) {
+		this.name = name;
+		this.birthday = birthday;
 	}
 	
-	public String getID() {
-		return ID;
+	public String getName() {
+		return name;
 	}
-
-	public void setID(String iD) {
-		ID = iD;
+	
+	public String getBirthday() {
+		return birthday;
 	}
-
+	
 	@Override
-	public int getNumber() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public Integer getWeight() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Graph getGraph() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Iterator getIncidentEdges() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Iterator getEmanatingEdges() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Iterator getPredecessors() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Iterator getSuccessors() {
-		// TODO Auto-generated method stub
-		return null;
+	public LinkedList<Vertex> getVizinhos() {
+		return listVertex;
 	}
 
 }
