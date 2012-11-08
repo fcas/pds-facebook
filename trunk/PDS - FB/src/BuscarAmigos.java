@@ -7,6 +7,7 @@ public class BuscarAmigos {
 
 		Connection<User> AmigosDeAmigos = Cliente.getInstance()
 				.fetchConnection(name + "/friends", User.class);
+		
 		return AmigosDeAmigos;
 
 	}
