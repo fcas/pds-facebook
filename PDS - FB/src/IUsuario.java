@@ -1,4 +1,3 @@
-import java.util.Date;
 
 public interface IUsuario {
 
@@ -14,7 +13,7 @@ public interface IUsuario {
 
 	public String getAbout(String name);
 
-	public Date getBirthdayAsDate(String name);
+	public String getBirthdayAsDate(String name);
 
 	public String getHometownName(String name);
 
