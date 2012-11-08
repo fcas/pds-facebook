@@ -6,7 +6,7 @@ public interface Graph {
 	int getNumberOfEdges(); 
 	int getNumberOfVertices(); 
 	boolean isDirected(); 
-	void addVertex(int v); 
+	void addVertex(Vertex v); 
 	void addVertex(int v, Integer weight); 
 	Vertex getVertex(int v); 
 	void addEdge(int v, int w); 

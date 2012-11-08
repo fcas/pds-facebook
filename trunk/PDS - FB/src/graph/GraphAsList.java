@@ -4,8 +4,11 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import br.ufrn.dimap.Grafo.excecoes.VerticeJaExisteException;
+
 public class GraphAsList extends AbstractGraph3 {
-	private List<Edge>[] adjacencyList; 
+	private List<Edge>[] adjacencyList;
+	private List<Vertex>[] vertexList; 
 	
 	public GraphAsList(int size){ 
 		super(size); 
@@ -34,8 +37,14 @@ public class GraphAsList extends AbstractGraph3 {
 	}
 
 	@Override
-	public void addVertex(int v) {
-		// TODO Auto-generated method stub
+	public void addVertex(Vertex vertice) {
+		 if (!existeVertice(vertice.getID())) {
+			 vertexList.add(vertice);
+			 adjacencyList.add(new LinkedList());
+	        } else {
+	            //System.out.println("Vértice já existe");
+	            throw new VerticeJaExisteException();
+	        }
 		
 	}
 
