@@ -1,6 +1,6 @@
 package graph;
 
-public class AbstractContainer extends AbstractObject implements Container{
+public abstract class AbstractContainer extends AbstractObject implements Container{
 	protected int count;
 	
 	public String toString(){

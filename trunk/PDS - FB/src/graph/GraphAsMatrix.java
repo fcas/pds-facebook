@@ -2,7 +2,7 @@ package graph;
 
 import java.util.Iterator;
 
-public class GraphAsMatrix extends AbstractGraph {
+public class GraphAsMatrix extends AbstractGraph3 {
 	private Edge[][] matrix; 
 	
 	public GraphAsMatrix(int size){ 
