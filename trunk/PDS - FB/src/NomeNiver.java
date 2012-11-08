@@ -1,5 +1,5 @@
 import java.util.List;
-import br.ufrn.dimap.Grafo.*;
+import graph.*;
 
 public class NomeNiver {
 
@@ -9,22 +9,21 @@ public class NomeNiver {
 
 		IUsuario usuario = new Usuario();
 		IListaIDs listaIDs = new ListaIDs();
-	
+
 		List<String> lista = listaIDs.buscarIDs(name);
-		 
-		GrafoLista grafo = new GrafoLista();
-		
-		String niver;
-		
-		for (int i = 0; i < lista.size(); i++) {
-			Vertice vertice = new Vertice(lista.get(i));
-			vertice.setAniversario(usuario.getBirthdayAsDate((lista.get(i))));
-			vertice.setNome(usuario.getName(lista.get(i)));
-		}
+
+		AbstractGraph graph = new GraphAsList(lista.size());
 
 		for (int i = 0; i < lista.size(); i++) {
-			niver = usuario.getBirthdayAsDate(((lista.get(i))));
-			System.out.println(niver);
+			ConcreteVertex vertex = new ConcreteVertex(usuario.getName(lista
+					.get(i)), usuario.getBirthday(lista.get(i)),
+					usuario.getID(lista.get(i)));
+			graph.addVertex(vertex);
+
+			if (i % 2 == 0) {
+				graph.addEdge(graph.getListVertex().get(i), graph
+						.getListVertex().get(i - 1));
+			}
 		}
 
 	}

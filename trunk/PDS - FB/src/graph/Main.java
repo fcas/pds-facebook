@@ -9,14 +9,14 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		AbstractGraph graph = new GraphAsList(10);
-		Vertex v1 = new ConcreteVertex("Larissa", "12/07");
-		Vertex v2 = new ConcreteVertex("Sérgio", "08/01");
-		Vertex v3 = new ConcreteVertex("Felipe", "04/02");
-		Vertex v4 = new ConcreteVertex("Jair", "06/08");
-		Vertex v5 = new ConcreteVertex("Thais", "20/08");
-		Vertex v6 = new ConcreteVertex("Cristina", "21/01");
-		Vertex v7 = new ConcreteVertex("João", "22/05");
-		Vertex v8 = new ConcreteVertex("José", "15/04");
+		Vertex v1 = new ConcreteVertex("Larissa", "12/07", "1");
+		Vertex v2 = new ConcreteVertex("Sérgio", "08/01","2");
+		Vertex v3 = new ConcreteVertex("Felipe", "04/02","3");
+		Vertex v4 = new ConcreteVertex("Jair", "06/08","3");
+		Vertex v5 = new ConcreteVertex("Thais", "20/08", "4");
+		Vertex v6 = new ConcreteVertex("Cristina", "21/01", "5");
+		Vertex v7 = new ConcreteVertex("João", "22/05", "6");
+		Vertex v8 = new ConcreteVertex("José", "15/04", "7");
 		graph.addVertex(v1);
 		graph.addVertex(v2);
 		graph.addVertex(v3);
