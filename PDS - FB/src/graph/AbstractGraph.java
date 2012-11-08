@@ -8,10 +8,14 @@ public abstract class AbstractGraph implements Graph {
 	protected int numberOfEdges; 
 	protected List<Vertex> listVertex; 
 	
+	public List<Vertex> getListVertex() {
+		return listVertex;
+	}
+
 	public AbstractGraph(int size){ 
 		listVertex = new ArrayList<Vertex>(); 
 		this.numberOfVertex = size; 
-	} 
+	} 	
 	
 //	public void depthFirst(Visitor visitor, int start) {
 //		boolean[] visited = new boolean[numberOfVertices];

@@ -1,6 +1,5 @@
 package graph;
 
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -58,7 +57,8 @@ public class GraphAsList extends AbstractGraph {
 	}
 
 	@Override
-	public void addVertex(Vertex v) {
-			super.listVertex.add(v);
+	public void addVertex(Vertex v) {	
+		
+		super.listVertex.add(v);
 	} 
 }
