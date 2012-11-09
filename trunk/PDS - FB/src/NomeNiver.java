@@ -1,4 +1,5 @@
 import java.util.List;
+
 import graph.*;
 
 public class NomeNiver {
@@ -20,7 +21,7 @@ public class NomeNiver {
 					usuario.getID(lista.get(i)));
 			graph.addVertex(vertex);
 
-			if (i % 2 == 0) {
+			if (i % 2 == 0) { 
 				graph.addEdge(graph.getListVertex().get(i), graph
 						.getListVertex().get(i - 1));
 			}
