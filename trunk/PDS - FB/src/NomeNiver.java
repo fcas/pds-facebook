@@ -14,6 +14,20 @@ public class NomeNiver {
 		List<String> lista = listaIDs.buscarIDs(name);
 
 		AbstractGraph graph = new GraphAsList(lista.size());
+		
+//		BufferedReader in;
+//		try {
+//
+//			in = new BufferedReader(
+//					new FileReader(
+//							""));
+//			while (in.ready()) {
+//				in.readLine();
+//
+//			}
+//		} catch (FileNotFoundException e1) {
+//			e1.printStackTrace();
+//		}
 
 		for (int i = 0; i < lista.size(); i++) {
 			ConcreteVertex vertex = new ConcreteVertex(usuario.getName(lista
