@@ -2,10 +2,12 @@ package graph;
 
 import java.util.LinkedList;
 
+import apifb.Data;
+
 public interface Vertex {
 	
 	public LinkedList getVizinhos();
 	public String getName();
-	public String getBirthday();
+	public Data getBirthday();
 	public String getId();
 }

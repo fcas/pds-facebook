@@ -1,3 +1,4 @@
+package apifb;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -44,7 +45,7 @@ public class NomeNiver {
 
 	}
 
-	public Data process(String str) throws IOException {
+	public static Data process(String str) throws IOException {
 
 		Data data = new Data();
 
