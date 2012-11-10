@@ -39,9 +39,7 @@ public class CriarArquivoAniversarios {
 			} catch (IOException e) {
 			}
 		}
-
 		out.close();
-
 	}
 
 }
