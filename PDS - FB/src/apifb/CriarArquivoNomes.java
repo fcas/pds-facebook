@@ -1,24 +1,28 @@
 package apifb;
+
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.restfb.types.User;
+
 public class CriarArquivoNomes {
 
-	public void criarArquivoNomes (String[] args) throws IOException {
-
-		String name = "felipecordeiroalves";
+	public void criarArquivoNomes(String name) throws IOException {
 
 		IUsuario usuario = new Usuario();
 		IListaIDs listaIDs = new ListaIDs();
+		User usuario_name = new User();
 
 		List<String> lista = listaIDs.buscarIDs(name);
 		List<String> nomes = new ArrayList<>();
 
 		BufferedWriter out = new BufferedWriter(new FileWriter(
-				"/home/felipe/nomes.txt"));
+				"/home/felipe/nomes_" + name + ".txt"));
+
+		out.write(usuario_name.getName() + "\n");
 
 		for (int i = 0; i < lista.size(); i++) {
 			nomes.add(usuario.getName(lista.get(i)));

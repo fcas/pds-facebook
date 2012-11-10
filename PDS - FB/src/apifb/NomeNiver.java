@@ -5,6 +5,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 
+import com.restfb.types.User;
+
 import graph.*;
 
 public class NomeNiver {
@@ -13,11 +15,12 @@ public class NomeNiver {
 
 		String name = "felipecordeiroalves";
 		String ids = "/home/felipe/ids.txt";
-		String aniversarios = "/home/felipe/aniversarios";
-		String nomes = "/home/felipe/nomes";
+		String aniversarios = "/home/felipe/aniversarios.txt";
+		String nomes = "/home/felipe/nomes.txt";
 
+		BuscarUsuario buscaUsuario = new BuscarUsuario();
+		User usuario = buscaUsuario.getUser(name);
 		IListaIDs listaIDs = new ListaIDs();
-
 		List<String> lista = listaIDs.buscarIDs(name);
 
 		AbstractGraph graph = new GraphAsList(lista.size());
@@ -31,7 +34,7 @@ public class NomeNiver {
 			in_ids = new BufferedReader(new FileReader(ids));
 			in_aniversarios = new BufferedReader(new FileReader(aniversarios));
 			in_nomes = new BufferedReader(new FileReader(nomes));
-
+			
 			while (in_ids.ready()) {
 				in_ids.readLine();
 				ConcreteVertex vertex = new ConcreteVertex(in_nomes.readLine(),

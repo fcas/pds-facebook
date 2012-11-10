@@ -1,27 +1,32 @@
 package apifb;
-import java.io.BufferedReader;
+
 import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.restfb.types.User;
+
 public class CriarArquivoAniversarios {
 
-	public void criarArquivoAniversarios(String[] args) throws IOException {
-
-		String name = "felipecordeiroalves";
+	public void criarArquivoAniversarios(String name) throws IOException {
 
 		IUsuario usuario = new Usuario();
 		IListaIDs listaIDs = new ListaIDs();
+		User usuario_name = new User();
+
+		BuscarUsuario buscarUsuario = new BuscarUsuario();
+		usuario_name = buscarUsuario.getUser(name);
 
 		List<String> lista = listaIDs.buscarIDs(name);
 		List<String> aniversarios = new ArrayList<>();
 
 		BufferedWriter out = new BufferedWriter(new FileWriter(
-				"/home/felipe/aniversarios.txt"));
+				"/home/felipe/aniversarios_" + name + ".txt"));
+
+		out.write(usuario_name.getBirthday() + "\n");// o usuario name é o
+														// primeiro do arquivo
 
 		for (int i = 0; i < lista.size(); i++) {
 			aniversarios.add(usuario.getBirthday(lista.get(i)));
@@ -36,42 +41,7 @@ public class CriarArquivoAniversarios {
 		}
 
 		out.close();
-		process();
 
 	}
 
-	public static void main(String[] args) throws IOException {
-		process();
-	}
-
-	public static void process() throws IOException {
-
-		BufferedReader in_aniversarios;
-		String aux;
-
-		Data data = new Data();
-
-		try {
-
-			in_aniversarios = new BufferedReader(new FileReader(
-					"/home/felipe/aniversario.txt"));
-
-			while (in_aniversarios.ready()) {
-				aux = in_aniversarios.readLine();
-				if (!aux.equals("null")) {
-					data.setDia(aux.substring(0, 2));
-					data.setMes(aux.substring(3, 5));
-					if (!aux.substring(5).equals("")) {
-						System.out.println(aux);
-						data.setAno(aux.substring(6, 10));
-					}
-
-				}
-			}
-
-		} catch (FileNotFoundException e1) {
-			e1.printStackTrace();
-		}
-
-	}
 }
