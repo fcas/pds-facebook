@@ -10,7 +10,7 @@ import com.restfb.types.User;
 
 public class CriarArquivoIds {
 
-	public void criarArquivoNomes(String name) throws IOException {
+	public void criarArquivoIds(String name) throws IOException {
 
 		IUsuario usuario = new Usuario();
 		IListaIDs listaIDs = new ListaIDs();
@@ -26,7 +26,7 @@ public class CriarArquivoIds {
 		out.write(usuario_name.getId() + "\n");
 
 		for (int i = 0; i < lista.size(); i++) {
-			ids.add(usuario.getName(lista.get(i)));
+			ids.add(usuario.getID(lista.get(i)));
 			System.out.println(i + "\n");
 		}
 
