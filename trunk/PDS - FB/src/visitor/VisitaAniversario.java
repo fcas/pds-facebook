@@ -6,8 +6,8 @@ public class VisitaAniversario implements Visitor{
 
 	public void visit(ConcreteVertex vertice)
 	{
-		if (vertice.getBirthday().startsWith("01")){
-			System.out.println("Nome: " + vertice.getName()+ "\nAniversário: "+ vertice.getBirthday() + "\n");
-		}
+//		if (vertice.getBirthday().startsWith("01")){
+//			System.out.println("Nome: " + vertice.getName()+ "\nAniversï¿½rio: "+ vertice.getBirthday() + "\n");
+//		}
 	}
 }
