@@ -14,7 +14,8 @@ public class CriarArquivoIds {
 
 		IUsuario usuario = new Usuario();
 		IListaIDs listaIDs = new ListaIDs();
-		User usuario_name = new User();
+		BuscarUsuario buscarUsuario = new BuscarUsuario();
+		User usuario_name = buscarUsuario.getUser(name);
 
 		List<String> lista = listaIDs.buscarIDs(name);
 		List<String> ids = new ArrayList<>();

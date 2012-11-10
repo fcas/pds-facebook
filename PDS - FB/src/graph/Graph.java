@@ -8,5 +8,6 @@ public interface Graph {
 	void addEdge(Vertex v, Vertex w);
 	boolean isEdge(Vertex v, Vertex w); 
 	void depthFirstTraversal(int startVertex); 
-	void breadthFirstTraversal(int startVertex); 
+	void breadthFirstTraversal(int startVertex);
+	public Vertex searchVertex(String id);
 }
