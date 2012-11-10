@@ -1,11 +1,11 @@
 package apifb;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
-
-import com.restfb.types.User;
 
 import graph.*;
 
@@ -13,37 +13,69 @@ public class NomeNiver {
 
 	public static void main(String[] args) throws IOException {
 
-		String name = "felipecordeiroalves";
-		String ids = "/home/felipe/ids.txt";
-		String aniversarios = "/home/felipe/aniversarios.txt";
-		String nomes = "/home/felipe/nomes.txt";
+		List<String> usuarios = new ArrayList<>();
+		List<String> enderecos = new ArrayList<>();
 
-		BuscarUsuario buscaUsuario = new BuscarUsuario();
-		User usuario = buscaUsuario.getUser(name);
-		IListaIDs listaIDs = new ListaIDs();
-		List<String> lista = listaIDs.buscarIDs(name);
+		usuarios.add("felipecordeiroalves");
+		usuarios.add("larissabatistaleite");
+		usuarios.add("showrodrigues");
 
-		AbstractGraph graph = new GraphAsList(lista.size());
+		CriarArquivoAniversarios arq_aniversario = new CriarArquivoAniversarios();
+		CriarArquivoIds arq_ids = new CriarArquivoIds();
+		CriarArquivoNomes arq_nomes = new CriarArquivoNomes();
+
+		int j = 0;
+
+		for (int i = 0; i < usuarios.size(); i++) {
+			arq_ids.criarArquivoNomes(usuarios.get(i));
+			arq_nomes.criarArquivoNomes(usuarios.get(i));
+			arq_aniversario.criarArquivoAniversarios(usuarios.get(i));
+			enderecos.add("/home/felipe/ids_" + usuarios.get(j++) + ".txt");
+			enderecos.add("/home/felipe/nomes_" + usuarios.get(j++) + ".txt");
+			enderecos.add("/home/felipe/aniversarios_" + usuarios.get(j++)
+					+ ".txt");
+		}
+
+		AbstractGraph3 graph = new GraphAsList();
 
 		BufferedReader in_ids;
-		BufferedReader in_aniversarios;
 		BufferedReader in_nomes;
+		BufferedReader in_aniversarios;
 
-		try {
+		for (int i = 0; i < enderecos.size();) {
 
-			in_ids = new BufferedReader(new FileReader(ids));
-			in_aniversarios = new BufferedReader(new FileReader(aniversarios));
-			in_nomes = new BufferedReader(new FileReader(nomes));
-			
-			while (in_ids.ready()) {
-				in_ids.readLine();
-				ConcreteVertex vertex = new ConcreteVertex(in_nomes.readLine(),
-						process(in_aniversarios.readLine()), in_ids.readLine());
-				graph.addVertex(vertex);
+			try {
+
+				in_ids = new BufferedReader(new FileReader(enderecos.get(i++)));
+				in_nomes = new BufferedReader(
+						new FileReader(enderecos.get(i++)));
+				in_aniversarios = new BufferedReader(new FileReader(
+						enderecos.get(i++)));
+
+				boolean primeiraLinha = true;
+				String id = in_ids.readLine();
+				Vertex user = graph.searchVertex(id);
+
+				while (in_ids.ready()) {
+					if (primeiraLinha) {
+						ConcreteVertex vertex = new ConcreteVertex(
+								in_nomes.readLine(),
+								process(in_aniversarios.readLine()), id);
+						graph.addVertex(vertex);
+						primeiraLinha = false;
+					} else {
+						ConcreteVertex vertex = new ConcreteVertex(
+								in_nomes.readLine(),
+								process(in_aniversarios.readLine()),
+								in_ids.readLine());
+						graph.addVertex(vertex);
+						graph.addEdge(user, vertex);
+					}
+				}
+
+			} catch (FileNotFoundException e1) {
+				e1.printStackTrace();
 			}
-
-		} catch (FileNotFoundException e1) {
-			e1.printStackTrace();
 		}
 
 	}

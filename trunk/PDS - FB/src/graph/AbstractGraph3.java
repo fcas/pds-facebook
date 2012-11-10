@@ -1,16 +1,14 @@
 package graph;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedList;
 
 public abstract class AbstractGraph3 implements Graph {
 	protected int numberOfVertices; 
 	protected int numberOfEdges; 
-	protected List vertex; 
+	protected LinkedList<Vertex> vertex; 
 	
-	public AbstractGraph3(int size){ 
-		vertex = new ArrayList(); 
-		this.numberOfVertices = size; 
+	public AbstractGraph3(){ 
+		vertex = new LinkedList(); 
 	}
 	 
 }
