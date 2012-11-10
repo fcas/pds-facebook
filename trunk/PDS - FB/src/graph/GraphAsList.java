@@ -64,6 +64,7 @@ public class GraphAsList extends AbstractGraph3 {
 		int posicaoDestino = searchPositionVertex(edge.getDestino().getId());
 		if (posicaoOrigem != -1 && posicaoDestino != -1) {
 			adjacencyList.get(posicaoOrigem).add(edge);
+			System.out.println(edge.getOrigem().getName()+ " tem amizade com " + edge.getDestino().getName());
 		} else {
 			System.out.println("Par de vértices não existe");
 		}
@@ -82,6 +83,7 @@ public class GraphAsList extends AbstractGraph3 {
 	public void addVertex(Vertex v) {
 		if (!existVertex(v.getId())) {
 			vertexList.add(v);
+			adjacencyList.add(new LinkedList());
 		}
 	}
 }
