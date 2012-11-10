@@ -54,14 +54,15 @@ public class NomeNiver {
 
 				boolean primeiraLinha = true;
 				String id = in_ids.readLine();
-				Vertex user = graph.searchVertex(id);
-
+				Vertex user = null;
+				
 				while (in_ids.ready()) {
 					if (primeiraLinha) {
 						ConcreteVertex vertex = new ConcreteVertex(
 								in_nomes.readLine(),
 								process(in_aniversarios.readLine()), id);
 						graph.addVertex(vertex);
+						user = graph.searchVertex(id);
 						primeiraLinha = false;
 					} else {
 						ConcreteVertex vertex = new ConcreteVertex(
@@ -69,7 +70,7 @@ public class NomeNiver {
 								process(in_aniversarios.readLine()),
 								in_ids.readLine());
 						graph.addVertex(vertex);
-						Edge edge = new ConcreteEdge(user, vertex);
+						Edge edge = new ConcreteEdge(user, graph.searchVertex(vertex.getId()));
 						graph.addEdge(edge);
 					}
 				}
