@@ -22,6 +22,16 @@ public class GraphAsList extends AbstractGraph3 {
 		return retorno;
 	}
 
+	public int searchPositionVertex(String id) {
+		int retorno = -1;
+		for (int i = 0; i < vertexList.size(); i++) {
+			if (id == vertexList.get(i).getId()) {
+				retorno = i;
+			}
+		}
+		return retorno;
+	}
+
 	public boolean existVertex(String id) {
 		return (searchVertex(id) != null);
 	}
@@ -49,9 +59,14 @@ public class GraphAsList extends AbstractGraph3 {
 	}
 
 	@Override
-	public void addEdge(Vertex v, Vertex w) {// verificar se ja existe
-		v.getVizinhos().add(w);
-		w.getVizinhos().add(v);
+	public void addEdge(Edge edge) {// verificar se ja existe
+		int posicaoOrigem = searchPositionVertex((edge.getOrigem().getId()));
+		int posicaoDestino = searchPositionVertex(edge.getDestino().getId());
+		if (posicaoOrigem != -1 && posicaoDestino != -1) {
+			adjacencyList.get(posicaoOrigem).add(edge);
+		} else {
+			System.out.println("Par de vértices não existe");
+		}
 	}
 
 	@Override
@@ -62,11 +77,11 @@ public class GraphAsList extends AbstractGraph3 {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public void addVertex(Vertex v) {
-		if (!existVertex(v.getId())){
+		if (!existVertex(v.getId())) {
 			vertexList.add(v);
-	    }
+		}
 	}
 }

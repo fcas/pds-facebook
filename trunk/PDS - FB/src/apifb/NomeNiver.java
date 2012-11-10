@@ -24,17 +24,17 @@ public class NomeNiver {
 		CriarArquivoIds arq_ids = new CriarArquivoIds();
 		CriarArquivoNomes arq_nomes = new CriarArquivoNomes();
 
-		int j = 0;
+		
 
-		for (int i = 0; i < usuarios.size(); i++) {
-			arq_ids.criarArquivoNomes(usuarios.get(i));
-			arq_nomes.criarArquivoNomes(usuarios.get(i));
-			arq_aniversario.criarArquivoAniversarios(usuarios.get(i));
-			enderecos.add("/home/felipe/ids_" + usuarios.get(j++) + ".txt");
-			enderecos.add("/home/felipe/nomes_" + usuarios.get(j++) + ".txt");
-			enderecos.add("/home/felipe/aniversarios_" + usuarios.get(j++)
-					+ ".txt");
-		}
+	for (int i = 0; i < usuarios.size(); i++) {
+//			arq_ids.criarArquivoIds(usuarios.get(i));
+			//arq_nomes.criarArquivoNomes(usuarios.get(i));
+			//arq_aniversario.criarArquivoAniversarios(usuarios.get(i));
+		enderecos.add("/home/felipe/ids_" + usuarios.get(i) + ".txt");
+		enderecos.add("/home/felipe/nomes_" + usuarios.get(i) + ".txt");
+		enderecos.add("/home/felipe/aniversarios_" + usuarios.get(i)
+				+ ".txt");
+	}
 
 		AbstractGraph3 graph = new GraphAsList();
 
@@ -69,7 +69,8 @@ public class NomeNiver {
 								process(in_aniversarios.readLine()),
 								in_ids.readLine());
 						graph.addVertex(vertex);
-						graph.addEdge(user, vertex);
+						Edge edge = new ConcreteEdge(user, vertex);
+						graph.addEdge(edge);
 					}
 				}
 
@@ -88,7 +89,6 @@ public class NomeNiver {
 			data.setDia(str.substring(0, 2));
 			data.setMes(str.substring(3, 5));
 			if (!str.substring(5).equals("")) {
-				System.out.println(str);
 				data.setAno(str.substring(6, 10));
 			}
 
