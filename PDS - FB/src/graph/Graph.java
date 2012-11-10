@@ -2,7 +2,6 @@ package graph;
 
 public interface Graph {
 	int getNumberOfEdges(); 
-	int getNumberOfVertices(); 
 	boolean isDirected(); 
 	void addVertex(Vertex v); 
 	void addEdge(Vertex v, Vertex w);

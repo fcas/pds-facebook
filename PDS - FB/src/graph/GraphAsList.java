@@ -1,24 +1,22 @@
 package graph;
 
 import java.util.LinkedList;
-import java.util.List;
 
-public class GraphAsList extends AbstractGraph {
-	private LinkedList<Edge>[] adjacencyList;
+public class GraphAsList extends AbstractGraph3 {
 
-	public GraphAsList(int size) {
-		super(size);
-		this.adjacencyList = new LinkedList[size];
-		for (int i = 0; i < size; ++i) {
-			this.adjacencyList[i] = new LinkedList<Edge>();
-		}
+	private LinkedList<LinkedList<Edge>> adjacencyList;
+	private LinkedList<Vertex> vertexList;
+
+	public GraphAsList() {
+		vertexList = new LinkedList();
+		adjacencyList = new LinkedList();
 	}
 
 	public Vertex searchVertex(String id) {
 		Vertex retorno = null;
-		for (int i = 0; i < super.listVertex.size(); i++) {
-			if (id == super.listVertex.get(i).getId()) {
-				retorno = super.listVertex.get(i);
+		for (int i = 0; i < vertexList.size(); i++) {
+			if (id == vertexList.get(i).getId()) {
+				retorno = vertexList.get(i);
 			}
 		}
 		return retorno;
@@ -31,11 +29,6 @@ public class GraphAsList extends AbstractGraph {
 	@Override
 	public int getNumberOfEdges() {
 		return super.numberOfEdges;
-	}
-
-	@Override
-	public int getNumberOfVertices() {
-		return super.numberOfVertex;
 	}
 
 	@Override
@@ -73,7 +66,7 @@ public class GraphAsList extends AbstractGraph {
 	@Override
 	public void addVertex(Vertex v) {
 		if (!existVertex(v.getId())){
-			super.listVertex.add(v);
+			vertexList.add(v);
 	    }
 	}
 }
