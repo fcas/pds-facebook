@@ -7,6 +7,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import visitor.VisitaAniversario;
+import visitor.Visitor;
+
 import graph.*;
 
 public class NomeNiver {
@@ -23,6 +26,7 @@ public class NomeNiver {
 		CriarArquivoAniversarios arq_aniversario = new CriarArquivoAniversarios();
 		CriarArquivoIds arq_ids = new CriarArquivoIds();
 		CriarArquivoNomes arq_nomes = new CriarArquivoNomes();
+		Visitor visitor = new VisitaAniversario();
 
 		
 
@@ -36,7 +40,7 @@ public class NomeNiver {
 				+ ".txt");
 	}
 
-		AbstractGraph3 graph = new GraphAsList();
+		AbstractGraph graph = new GraphAsList();
 
 		BufferedReader in_ids;
 		BufferedReader in_nomes;
@@ -79,6 +83,9 @@ public class NomeNiver {
 				e1.printStackTrace();
 			}
 		}
+		
+		graph.setAdjacencyList(graph.getEdges());
+		graph.depthFirstTraversal(visitor, 0);
 
 	}
 

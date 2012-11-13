@@ -1,15 +1,16 @@
 package graph;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-public class GraphAsList extends AbstractGraph3 {
+import visitor.Visitor;
 
+public class GraphAsList extends AbstractGraph {
 	private LinkedList<LinkedList<Edge>> adjacencyList;
-	private LinkedList<Vertex> vertexList;
 
 	public GraphAsList() {
-		vertexList = new LinkedList();
+		super.vertexList = new ArrayList<Vertex>();
 		adjacencyList = new LinkedList();
 	}
 
@@ -25,19 +26,19 @@ public class GraphAsList extends AbstractGraph3 {
 	}
 
 	@Override
-	public Edge removeEdge(String origemId, String destinoId){
+	public Edge removeEdge(String origemId, String destinoId) {
 		Edge retorno = null;
 		int posicaoOrigem = searchPositionVertex(origemId);
-		int posicaoDestino =searchPositionVertex(destinoId);
-		Iterator<Edge> arestaIterador = adjacencyList.get(posicaoOrigem)
+		int posicaoDestino = searchPositionVertex(destinoId);
+		Iterator<Edge> EdgeIterador = adjacencyList.get(posicaoOrigem)
 				.iterator();
-		Edge arestaAux;
+		Edge EdgeAux;
 		if (posicaoOrigem != -1 && posicaoDestino != -1) {
-			while (arestaIterador.hasNext() && retorno == null) {
-				arestaAux = arestaIterador.next();
-				if (arestaAux.getDestino().getId() == destinoId) {
-					adjacencyList.get(posicaoOrigem).remove(arestaAux);
-					retorno = arestaAux;
+			while (EdgeIterador.hasNext() && retorno == null) {
+				EdgeAux = EdgeIterador.next();
+				if (EdgeAux.getDestino().getId() == destinoId) {
+					adjacencyList.get(posicaoOrigem).remove(EdgeAux);
+					retorno = EdgeAux;
 				}
 			}
 		} else {
@@ -72,15 +73,15 @@ public class GraphAsList extends AbstractGraph3 {
 
 	@Override
 	public Iterator<Edge> getEdges() {
-		LinkedList<Edge> arestas = new LinkedList();
-		Iterator<Edge> arestasIterador;
+		LinkedList<Edge> Edges = new LinkedList();
+		Iterator<Edge> EdgesIterador;
 		for (int i = 0; i < vertexList.size(); i++) {
-			arestasIterador = adjacencyList.get(i).iterator();
-			while (arestasIterador.hasNext()) {
-				arestas.add(arestasIterador.next());
+			EdgesIterador = adjacencyList.get(i).iterator();
+			while (EdgesIterador.hasNext()) {
+				Edges.add(EdgesIterador.next());
 			}
 		}
-		return arestas.iterator();
+		return Edges.iterator();
 	}
 
 	@Override
@@ -99,15 +100,8 @@ public class GraphAsList extends AbstractGraph3 {
 	}
 
 	@Override
-	public void depthFirstTraversal(int startVertex) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void breadthFirstTraversal(int startVertex) {
-		// TODO Auto-generated method stub
-
+	public void depthFirstTraversal(Visitor visitor, int startVertex) {
+		super.depthFirstTraversal(visitor, startVertex);
 	}
 
 	@Override
@@ -116,8 +110,8 @@ public class GraphAsList extends AbstractGraph3 {
 		int posicaoDestino = searchPositionVertex(edge.getDestino().getId());
 		if (posicaoOrigem != -1 && posicaoDestino != -1) {
 			adjacencyList.get(posicaoOrigem).add(edge);
-			System.out.println(edge.getOrigem().getName() + " tem amizade com "
-					+ edge.getDestino().getName());
+//			System.out.println(edge.getOrigem().getName() + " tem amizade com "
+//					+ edge.getDestino().getName());
 		} else {
 			System.out.println("Par de vértices não existe");
 		}
@@ -138,5 +132,11 @@ public class GraphAsList extends AbstractGraph3 {
 			vertexList.add(v);
 			adjacencyList.add(new LinkedList());
 		}
+	}
+	
+
+	@Override
+	public void breadthFirstTraversal(int startVertex) {
+
 	}
 }
