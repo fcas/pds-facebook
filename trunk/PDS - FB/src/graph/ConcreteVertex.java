@@ -1,9 +1,13 @@
 package graph;
 
+import java.util.Iterator;
 import java.util.LinkedList;
+
+import visitor.Visitable;
+import visitor.Visitor;
 import apifb.Data;
 
-public class ConcreteVertex implements Vertex {
+public class ConcreteVertex implements Vertex, Visitable {
 	private LinkedList<Vertex> listVertex = new LinkedList<Vertex>();
 	private String name;
 	private Data birthday;
@@ -34,4 +38,8 @@ public class ConcreteVertex implements Vertex {
 		return id;
 	}
 
+	@Override
+	public void accept(Visitor visitor) {
+		visitor.visit(this);
+	}
 }

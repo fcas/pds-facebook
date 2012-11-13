@@ -1,6 +1,7 @@
 package graph;
 
 import java.util.Iterator;
+import visitor.Visitor;;
 
 public interface Graph {
 	
@@ -14,7 +15,7 @@ public interface Graph {
 
 	boolean isEdge(Vertex v, Vertex w);
 
-	void depthFirstTraversal(int startVertex);
+	void depthFirstTraversal(Visitor visitor, int startVertex);
 
 	void breadthFirstTraversal(int startVertex);
 
