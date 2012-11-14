@@ -1,7 +1,10 @@
 package graph;
 
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
+
 import visitor.Visitor;
 
 public abstract class AbstractGraph implements Graph {
@@ -44,4 +47,27 @@ public abstract class AbstractGraph implements Graph {
 
 	}
 
+	public void breadthFirstTraversal(Visitor visitor, int start) {
+		boolean enqueued[] = new boolean[this.numberOfVertex];
+		
+		Queue<Vertex> queue = new LinkedList<Vertex>();
+		enqueued[start] = true;
+		queue.add(vertexList.get(start));
+		
+		while (!queue.isEmpty()){
+			Vertex vertex = queue.remove();
+			((ConcreteVertex) vertex).accept(visitor);
+			Iterator<Edge> sucessors = adjacencyList;
+			
+			//Enfileira os sucessores
+			while (sucessors.hasNext()) {
+				Vertex next = sucessors.next().getDestino();
+				if (!enqueued[searchPositionVertex(next.getId())]){
+					enqueued[searchPositionVertex(next.getId())] = true;
+					queue.add(next);
+				}
+					
+			}
+		}
+	}
 }

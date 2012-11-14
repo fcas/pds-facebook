@@ -17,7 +17,7 @@ public interface Graph {
 
 	void depthFirstTraversal(Visitor visitor, int startVertex);
 
-	void breadthFirstTraversal(int startVertex);
+	void breadthFirstTraversal(Visitor visitor, int startVertex);
 
 	public Vertex searchVertex(String id);
 
