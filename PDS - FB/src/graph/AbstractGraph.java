@@ -23,44 +23,22 @@ public abstract class AbstractGraph implements Graph {
 		boolean[] visited = new boolean[vertexList.size()];
 		for (int i = 0; i < vertexList.size(); ++i) {
 			visited[i] = false;
-			depthFirstTraversal(visitor, vertexList.get(start), visited);
 		}
+		depthFirstTraversal(visitor, vertexList.get(start), visited);
 
 	}
 
 	private void depthFirstTraversal(Visitor visitor, Vertex v,
 			boolean[] visited) {
 
-		if (visitor.isDone())
-			return;
-
-		visitor.visit((ConcreteVertex) v);
+		((ConcreteVertex) v).accept(visitor);
 		visited[searchPositionVertex(v.getId())] = true;
-		// LinkedList<Vertex> p = v.getVizinhos();
-		//
-		// for (int i = 0; i < p.size(); i++) {
-		//
-		// System.out.println(p.get(i).getName());
-		// }
-		//
-		//
-		// for (int i = 0; i < p.size(); i++) {
-		// Vertex to = p.get(i);
-		// if (!visited[searchPositionVertex(v.getId())])
-		// depthFirstTraversal(visitor, to, visited);
-		// }
 
 		Iterator<Edge> p = adjacencyList;
 
-		// DESCOMENTA PARA VER QUE A LEITURA DA LISTA DE ADJACENCIAS ESTÁ
-		// CORRETA.
-		// while (p.hasNext()) {
-		// System.out.println(p.next().getDestino().getName());
-		// }
-
 		while (p.hasNext()) {
 			Vertex to = p.next().getDestino();
-			if (!visited[searchPositionVertex(v.getId())])
+			if (!visited[searchPositionVertex(to.getId())])
 				depthFirstTraversal(visitor, to, visited);
 		}
 

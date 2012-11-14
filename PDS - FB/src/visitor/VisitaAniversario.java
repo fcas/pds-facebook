@@ -8,10 +8,5 @@ public class VisitaAniversario implements Visitor {
 	public void visit(ConcreteVertex vertice) {
 		System.out.println("Nome: " + vertice.getName() + "\nAniversário: "
 				+ vertice.getBirthday().getDia() + "\n");
-		visited = true;
-	}
-
-	public boolean isDone() {
-		return visited;
 	}
 }
