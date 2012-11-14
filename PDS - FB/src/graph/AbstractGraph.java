@@ -48,9 +48,10 @@ public abstract class AbstractGraph implements Graph {
 	}
 
 	public void breadthFirstTraversal(Visitor visitor, int start) {
-		boolean enqueued[] = new boolean[this.numberOfVertex];
+		boolean enqueued[] = new boolean[vertexList.size()];
 		
 		Queue<Vertex> queue = new LinkedList<Vertex>();
+		
 		enqueued[start] = true;
 		queue.add(vertexList.get(start));
 		

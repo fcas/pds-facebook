@@ -85,7 +85,9 @@ public class NomeNiver {
 		}
 		
 		graph.setAdjacencyList(graph.getEdges());
-		graph.depthFirstTraversal(visitor, 0);
+//		graph.depthFirstTraversal(visitor, 0);
+		graph.breadthFirstTraversal(visitor, 0);
+
 
 	}
 
