@@ -10,13 +10,13 @@ package tests;
  * @author Anthonini
  */
 public class VerticeNaoExisteException extends Exception {
-    int id;
-
-    public VerticeNaoExisteException( int id ){
-        this.id = id;
-    }
-
-    public int getId(){
-        return id;
-    }
+//    int id;
+//
+//    public VerticeNaoExisteException( int id ){
+//        this.id = id;
+//    }
+//
+//    public int getId(){
+//        return id;
+//    }
 }

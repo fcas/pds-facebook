@@ -1,6 +1,10 @@
 package graph;
 
 import java.util.Iterator;
+
+import tests.ParDeVerticesNaoExistenteException;
+import tests.VerticeJaExisteException;
+import tests.VerticeNaoExisteException;
 import visitor.Visitor;;
 
 public interface Graph {
@@ -9,9 +13,9 @@ public interface Graph {
 
 	boolean isDirected();
 
-	void addVertex(Vertex v);
+	void addVertex(Vertex v) throws VerticeJaExisteException;
 
-	void addEdge(Edge edge);
+	void addEdge(Edge edge) throws ParDeVerticesNaoExistenteException;
 
 	boolean isEdge(Vertex v, Vertex w);
 
@@ -21,9 +25,9 @@ public interface Graph {
 
 	public Vertex searchVertex(String id);
 
-	public Edge removeEdge(String origemId, String destinoId);
+	public Edge removeEdge(String origemId, String destinoId) throws ParDeVerticesNaoExistenteException;
 
-	public Vertex removeVertex(String id);
+	public Vertex removeVertex(String id) throws VerticeNaoExisteException;
 
 	public int searchPositionVertex(String id);
 
