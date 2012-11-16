@@ -14,26 +14,25 @@ import visitor.Visitor;
 import visitor.VisitorTeste;
 import apifb.GerarGrafo;
 
-public class DepthSearchTest {
-
+public class BreadthSearchTest {
+	
 	GerarGrafo gerador; //criador do grafo
 	AbstractGraph graph; //grafo concreto
 	Visitor visitor; //visitor vazio. Apenas para a busca iterar.
 	List<Vertex> list; //lista vazia. A busca preenche a lista com os vértices percorridos.
-	
+
 	@Before
 	public void setUp() throws Exception {
 		gerador = new GerarGrafo(); //inicializa o gerador
 		graph = gerador.getGraph(); //gera o grafo concreto
 		visitor = new VisitorTeste();
-		list = new ArrayList<Vertex>(); 
+		list = new ArrayList<Vertex>();
 	}
-	
+
 	@Test
-	public void testBuscaDepth() {
-		
+	public void test() {
 		//run
-		graph.depthFirstTraversal(visitor, 0, list);
+		graph.breadthFirstTraversal(visitor, 0, list);
 		
 		//assert
 		for (int i = 0; i< list.size(); i++){
@@ -41,4 +40,5 @@ public class DepthSearchTest {
 		}
 		assertEquals(true,!list.isEmpty());
 	}
+
 }
