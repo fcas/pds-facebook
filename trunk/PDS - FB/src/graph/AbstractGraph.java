@@ -14,22 +14,17 @@ public abstract class AbstractGraph implements Graph {
 	protected int numberOfVertex;
 	private Iterator<Edge> adjacencyList;
 
+	
 	public List<Vertex> getListVertex() {
 		return vertexList;
 	}
 
+	
 	public void setAdjacencyList(Iterator<Edge> iterator) {
 		this.adjacencyList = iterator;
 	}
 
-	/*public void depthFirstTraversal(int start) {
-		boolean[] visited = new boolean[vertexList.size()];
-		for (int i = 0; i < vertexList.size(); ++i) {
-			visited[i] = false;
-		}
-	}
-	*/
-	
+	/**Cria um boolean[] auxiliar e chama o metodo concreto de percorrimento**/
 	public void depthFirstTraversal(Visitor visitor, int start, List<Vertex> list) {
 		
 		boolean[] visited = new boolean[vertexList.size()];
@@ -39,6 +34,8 @@ public abstract class AbstractGraph implements Graph {
 		depthFirstTraversal(visitor, vertexList.get(start), visited, list);
 	}
 
+	/**Percorre o grafo em profundidade chamando o metodo accept de todos os vertices e
+	 * adiciona numa lista ligada todos os vertices que percorre**/
 	private void depthFirstTraversal(Visitor visitor, Vertex v,
 			boolean[] visited, List<Vertex> list) {
 		
@@ -55,7 +52,8 @@ public abstract class AbstractGraph implements Graph {
 		}
 	}
 	
-
+	/**Percorre o grafo em largura chamando o metodo accept de todos os vertices e
+	 * adiciona numa lista ligada todos os vertices que percorre**/
 	public void breadthFirstTraversal(Visitor visitor, int start, List<Vertex> list) {
 		boolean enqueued[] = new boolean[vertexList.size()];
 		

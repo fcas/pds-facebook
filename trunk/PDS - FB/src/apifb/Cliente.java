@@ -12,6 +12,7 @@ public class Cliente {
 	private Cliente() {
 	}
 
+	/**retorna o Client criado com o token dado**/
 	public static FacebookClient getInstance() {
 		return facebookClient;
 	}

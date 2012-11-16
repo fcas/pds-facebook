@@ -6,6 +6,7 @@ import com.restfb.types.User;
 
 public class ListaIDs implements IListaIDs {
 
+	/**Retorna uma lista de ids dos amigos procurados**/
 	public List<String> buscarIDs(String name) {
 
 		Connection<User> amigos = Cliente.getInstance().fetchConnection(
