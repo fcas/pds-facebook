@@ -1,6 +1,7 @@
 package graph;
 
 import java.util.Iterator;
+import java.util.List;
 
 import tests.ParDeVerticesNaoExistenteException;
 import tests.VerticeJaExisteException;
@@ -19,7 +20,7 @@ public interface Graph {
 
 	boolean isEdge(Vertex v, Vertex w);
 
-	void depthFirstTraversal(Visitor visitor, int startVertex);
+	void depthFirstTraversal(Visitor visitor, int startVertex, List<Vertex> list);
 
 	void breadthFirstTraversal(Visitor visitor, int startVertex);
 
