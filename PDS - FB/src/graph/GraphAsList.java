@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 
+import tests.ParDeVerticesNaoExistenteException;
+import tests.VerticeJaExisteException;
+import tests.VerticeNaoExisteException;
 import visitor.Visitor;
 
 public class GraphAsList extends AbstractGraph {
@@ -26,7 +29,7 @@ public class GraphAsList extends AbstractGraph {
 	}
 
 	@Override
-	public Edge removeEdge(String origemId, String destinoId) {
+	public Edge removeEdge(String origemId, String destinoId) throws ParDeVerticesNaoExistenteException {
 		Edge retorno = null;
 		int posicaoOrigem = searchPositionVertex(origemId);
 		int posicaoDestino = searchPositionVertex(destinoId);
@@ -42,20 +45,20 @@ public class GraphAsList extends AbstractGraph {
 				}
 			}
 		} else {
-			System.out.println("Par de vértices não existe");
+			throw new ParDeVerticesNaoExistenteException();
 		}
 		return retorno;
 	}
 
 	@Override
-	public Vertex removeVertex(String id) {
+	public Vertex removeVertex(String id) throws VerticeNaoExisteException{
 		Vertex retorno = null;
 		int posicaoVertice = searchPositionVertex(id);
 		if (posicaoVertice != -1) {
 			vertexList.remove(posicaoVertice);
 			adjacencyList.remove(posicaoVertice);
 		} else {
-			System.out.println("Vértice com Id = " + id + " não Existe");
+			throw new VerticeNaoExisteException(id);
 		}
 		return retorno;
 	}
@@ -110,13 +113,13 @@ public class GraphAsList extends AbstractGraph {
 	}
 
 	@Override
-	public void addEdge(Edge edge) {// verificar se ja existe
+	public void addEdge(Edge edge) throws ParDeVerticesNaoExistenteException {
 		int posicaoOrigem = searchPositionVertex((edge.getOrigem().getId()));
 		int posicaoDestino = searchPositionVertex(edge.getDestino().getId());
 		if (posicaoOrigem != -1 && posicaoDestino != -1) {
 			adjacencyList.get(posicaoOrigem).add(edge);
 		} else {
-			System.out.println("Par de vértices não existe");
+			throw new ParDeVerticesNaoExistenteException();
 		}
 	}
 
@@ -130,10 +133,12 @@ public class GraphAsList extends AbstractGraph {
 	}
 
 	@Override
-	public void addVertex(Vertex v) {
+	public void addVertex(Vertex v) throws VerticeJaExisteException {
 		if (!existVertex(v.getId())) {
 			vertexList.add(v);
 			adjacencyList.add(new LinkedList());
+		} else {
+			throw new VerticeJaExisteException(); 
 		}
 	}
 	
