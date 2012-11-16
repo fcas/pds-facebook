@@ -16,7 +16,7 @@ import apifb.GerarGrafo;
 
 public class BreadthSearchTest {
 	
-	GerarGrafo gerador; //criador do grafo
+	GerarGrafo gerador; //gerador de grafo
 	AbstractGraph graph; //grafo concreto
 	Visitor visitor; //visitor vazio. Apenas para a busca iterar.
 	List<Vertex> list; //lista vazia. A busca preenche a lista com os vértices percorridos.
@@ -25,8 +25,8 @@ public class BreadthSearchTest {
 	public void setUp() throws Exception {
 		gerador = new GerarGrafo(); //inicializa o gerador
 		graph = gerador.getGraph(); //gera o grafo concreto
-		visitor = new VisitorTeste();
-		list = new ArrayList<Vertex>();
+		visitor = new VisitorTeste(); //inicializa o visitor do tipo teste
+		list = new ArrayList<Vertex>(); //inicializa a lista.
 	}
 
 	@Test

@@ -35,6 +35,11 @@ public class GerarGrafo {
 		usuarios.add("larissabatistaleite");
 		usuarios.add("showrodrigues");
 
+		/*Alterar o endereco com o diretorio dos arquivos txt.
+		 * Em linux, usar barra normal para divisao de diretorios (/).
+		 * ex.: /Home/Usuario/Entrada
+		 * Para Windows, usar dupla barra invertida (\\)
+		 * ex.: C:\\Users\\Public\\Documents\\Entrada   */
 		for (int i = 0; i < usuarios.size(); i++) {
 			enderecos.add("C:\\pdsfb\\ids_" + usuarios.get(i) + ".txt");
 			enderecos.add("C:\\pdsfb\\nomes_" + usuarios.get(i) + ".txt");
@@ -99,10 +104,12 @@ public class GerarGrafo {
 			}
 		}
 
+		//Coloca as arestas no grafo.
 		graph.setAdjacencyList(graph.getEdges());
 
 	}
 	
+	/** Retorna um grafo construído e povoado. **/
 	public AbstractGraph getGraph() throws FileNotFoundException, IOException, VerticeJaExisteException, ParDeVerticesNaoExistenteException{
 		Povoar();
 		return graph;

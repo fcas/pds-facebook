@@ -22,6 +22,11 @@ public class CriarArquivoAniversarios {
 		List<String> lista = listaIDs.buscarIDs(name);
 		List<String> aniversarios = new ArrayList<>();
 
+		/*Alterar o endereco com o diretorio dos arquivos txt.
+		 * Em linux, usar barra normal para divisao de diretorios (/).
+		 * ex.: /Home/Usuario/Entrada
+		 * Para Windows, usar dupla barra invertida (\\)
+		 * ex.: C:\\Users\\Public\\Documents\\Entrada   */
 		BufferedWriter out = new BufferedWriter(new FileWriter(
 				"/home/felipe/aniversarios_" + name + ".txt"));
 

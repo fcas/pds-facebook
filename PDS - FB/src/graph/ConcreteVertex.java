@@ -27,16 +27,18 @@ public class ConcreteVertex implements Vertex, Visitable {
 	}
 
 	@Override
-	public LinkedList<Vertex> getVizinhos() {
-		return listVertex;
-	}
-
-	@Override
 	public String getId() {
 		// TODO Auto-generated method stub
 		return id;
 	}
+	
+	/**Retorna uma lista de vertices com os vizinhos**/
+	@Override
+	public LinkedList<Vertex> getVizinhos() {
+		return listVertex;
+	}
 
+	/**Chama metodo visit do visitor passado por parametro se passando como parametro**/
 	@Override
 	public void accept(Visitor visitor) {
 		visitor.visit(this);

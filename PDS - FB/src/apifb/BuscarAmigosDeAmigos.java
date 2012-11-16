@@ -4,6 +4,7 @@ import com.restfb.types.User;
 
 public class BuscarAmigosDeAmigos {
 
+	/**Tenta buscar e guardar as informações de amigos**/
 	public Connection<User> buscarAmigosDeAmigos(Connection<User> friends, String name) {
 
 		for (int i = 0; i < friends.getData().size(); i++) {
