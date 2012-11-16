@@ -103,6 +103,11 @@ public class GraphAsList extends AbstractGraph {
 	public void depthFirstTraversal(Visitor visitor, int startVertex) {
 		super.depthFirstTraversal(visitor, startVertex);
 	}
+	
+	@Override
+	public void breadthFirstTraversal(Visitor visitor, int start){
+		super.breadthFirstTraversal(visitor, start);
+	}
 
 	@Override
 	public void addEdge(Edge edge) {// verificar se ja existe
@@ -110,8 +115,6 @@ public class GraphAsList extends AbstractGraph {
 		int posicaoDestino = searchPositionVertex(edge.getDestino().getId());
 		if (posicaoOrigem != -1 && posicaoDestino != -1) {
 			adjacencyList.get(posicaoOrigem).add(edge);
-//			System.out.println(edge.getOrigem().getName() + " tem amizade com "
-//					+ edge.getDestino().getName());
 		} else {
 			System.out.println("Par de vértices não existe");
 		}
@@ -135,8 +138,4 @@ public class GraphAsList extends AbstractGraph {
 	}
 	
 
-	@Override
-	public void breadthFirstTraversal(int startVertex) {
-
-	}
 }
