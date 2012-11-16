@@ -68,6 +68,7 @@ public abstract class AbstractGraph implements Graph {
 		while (!queue.isEmpty()){
 			Vertex vertex = queue.remove();
 			((ConcreteVertex) vertex).accept(visitor);
+			list.add(vertex);
 			Iterator<Edge> sucessors = adjacencyList;
 			
 			//Enfileira os sucessores
