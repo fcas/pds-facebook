@@ -28,6 +28,7 @@ public class GerarGrafo {
 	BufferedReader in_nomes;
 	BufferedReader in_aniversarios;
 
+	/** Inicializa a lista de usuários e os diretórios para a criação dos grafos **/
 	public GerarGrafo() {
 
 		usuarios.add("felipecordeiroalves");
@@ -35,14 +36,16 @@ public class GerarGrafo {
 		usuarios.add("showrodrigues");
 
 		for (int i = 0; i < usuarios.size(); i++) {
-			enderecos.add("/home/felipe/ids_" + usuarios.get(i) + ".txt");
-			enderecos.add("/home/felipe/nomes_" + usuarios.get(i) + ".txt");
-			enderecos.add("/home/felipe/aniversarios_" + usuarios.get(i)
+			enderecos.add("C:\\pdsfb\\ids_" + usuarios.get(i) + ".txt");
+			enderecos.add("C:\\pdsfb\\nomes_" + usuarios.get(i) + ".txt");
+			enderecos.add("C:\\pdsfb\\aniversarios_" + usuarios.get(i)
 					+ ".txt");
+			System.out.println(enderecos.get(i));
 		}
+		
 	}
 
-	/* Transforma string em data. */
+	/** Transforma string em data. **/
 	public static Data process(String str) throws IOException {
 
 		Data data = new Data();
@@ -60,7 +63,7 @@ public class GerarGrafo {
 
 	}
 
-	/* Povoa o grafo */
+	/** Povoa o grafo **/
 	private void Povoar() throws IOException, VerticeJaExisteException,
 			ParDeVerticesNaoExistenteException, FileNotFoundException {
 		
