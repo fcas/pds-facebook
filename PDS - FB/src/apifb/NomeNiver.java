@@ -9,7 +9,7 @@ import java.util.List;
 
 import tests.ParDeVerticesNaoExistenteException;
 import tests.VerticeJaExisteException;
-import visitor.VisitaAniversario;
+import visitor.VisitorAniversario;
 import visitor.Visitor;
 
 import graph.*;
@@ -25,7 +25,7 @@ public class NomeNiver {
 		CriarArquivoAniversarios arq_aniversario = new CriarArquivoAniversarios();
 		CriarArquivoIds arq_ids = new CriarArquivoIds();
 		CriarArquivoNomes arq_nomes = new CriarArquivoNomes();
-		Visitor visitor = new VisitaAniversario();
+		Visitor visitor = new VisitorAniversario();
 
 		usuarios.add("felipecordeiroalves");
 		usuarios.add("larissabatistaleite");

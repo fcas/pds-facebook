@@ -2,8 +2,7 @@ package visitor;
 
 import graph.*;
 
-public class VisitaAniversario implements Visitor {
-	public boolean visited = false;
+public class VisitorAniversario implements Visitor {
 
 	public void visit(ConcreteVertex vertice) {
 		System.out.println("Nome: " + vertice.getName() + "\nAniversário: "
