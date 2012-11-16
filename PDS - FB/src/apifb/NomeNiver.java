@@ -40,7 +40,7 @@ public class NomeNiver {
 		AbstractGraph graph = gerador.getGraph();
 
 		// graph.depthFirstTraversal(visitor, 0);
-		graph.breadthFirstTraversal(visitor, 0);
+		//graph.breadthFirstTraversal(visitor, 0);   /**colocar o parametro list**/
 
 	}
 }

@@ -22,7 +22,7 @@ public interface Graph {
 
 	void depthFirstTraversal(Visitor visitor, int startVertex, List<Vertex> list);
 
-	void breadthFirstTraversal(Visitor visitor, int startVertex);
+	void breadthFirstTraversal(Visitor visitor, int startVertex, List<Vertex> list);
 
 	public Vertex searchVertex(String id);
 

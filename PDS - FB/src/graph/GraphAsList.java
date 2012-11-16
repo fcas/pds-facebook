@@ -3,6 +3,7 @@ package graph;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 
 import tests.ParDeVerticesNaoExistenteException;
 import tests.VerticeJaExisteException;
@@ -103,13 +104,13 @@ public class GraphAsList extends AbstractGraph {
 	}
 
 	@Override
-	public void depthFirstTraversal(Visitor visitor, int startVertex) {
-		super.depthFirstTraversal(visitor, startVertex);
+	public void depthFirstTraversal(Visitor visitor, int startVertex, List<Vertex> list) {
+		super.depthFirstTraversal(visitor, startVertex, list);
 	}
 	
 	@Override
-	public void breadthFirstTraversal(Visitor visitor, int start){
-		super.breadthFirstTraversal(visitor, start);
+	public void breadthFirstTraversal(Visitor visitor, int start, List<Vertex> list){
+		super.breadthFirstTraversal(visitor, start, list);
 	}
 
 	@Override
