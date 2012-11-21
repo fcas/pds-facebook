@@ -10,6 +10,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+
 import visitor.Visitor;
 import visitor.VisitorTeste;
 import apifb.GerarGrafo;
@@ -19,7 +20,7 @@ public class BreadthSearchTest {
 	GerarGrafo gerador; //gerador de grafo
 	AbstractGraph graph; //grafo concreto
 	Visitor visitor; //visitor vazio. Apenas para a busca iterar.
-	List<Vertex> list; //lista vazia. A busca preenche a lista com os vértices percorridos.
+	List<Vertex> list; //lista vazia. A busca preenche a lista com os vï¿½rtices percorridos.
 
 	@Before
 	public void setUp() throws Exception {

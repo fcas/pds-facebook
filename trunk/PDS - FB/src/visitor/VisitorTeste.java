@@ -1,10 +1,12 @@
 package visitor;
 
+import visitor.Visitor;
 import graph.ConcreteVertex;
+
 
 public class VisitorTeste implements Visitor{
 
-	/** Não altera nada. Usado apenas para testar as funções de busca em profundidade e largura do grafo**/
+	/** Nï¿½o altera nada. Usado apenas para testar as funï¿½ï¿½es de busca em profundidade e largura do grafo**/
 	@Override
 	public void visit(ConcreteVertex vertice) {
 		//do_nothing;
