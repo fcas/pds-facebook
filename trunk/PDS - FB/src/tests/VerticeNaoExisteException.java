@@ -5,22 +5,11 @@
 
 package tests;
 
-/**
- *
- * @author Anthonini
- */
+@SuppressWarnings("serial")
 public class VerticeNaoExisteException extends Exception {
 
 	public VerticeNaoExisteException(String id) {
 		// TODO Auto-generated constructor stub
 	}
-//    int id;
-//
-//    public VerticeNaoExisteException( int id ){
-//        this.id = id;
-//    }
-//
-//    public int getId(){
-//        return id;
-//    }
+
 }
