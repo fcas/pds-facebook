@@ -1,8 +1,5 @@
 package apifb;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +13,7 @@ import graph.*;
 
 public class NomeNiver {
 
+	@SuppressWarnings("unused")
 	public static void main(String[] args) throws IOException,
 			ParDeVerticesNaoExistenteException, VerticeJaExisteException {
 
@@ -37,6 +35,7 @@ public class NomeNiver {
 			// arq_aniversario.criarArquivoAniversarios(usuarios.get(i));
 
 		}
+		
 		AbstractGraph graph = gerador.getGraph();
 		
 		

@@ -13,6 +13,7 @@ import visitor.Visitor;
 public class GraphAsList extends AbstractGraph {
 	private LinkedList<LinkedList<Edge>> adjacencyList;
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public GraphAsList() {
 		super.vertexList = new ArrayList<Vertex>();
 		adjacencyList = new LinkedList();
@@ -80,8 +81,10 @@ public class GraphAsList extends AbstractGraph {
 	}
 
 	/**Retorna as arestas do grafo**/
+	@SuppressWarnings("unchecked")
 	@Override
 	public Iterator<Edge> getEdges() {
+		@SuppressWarnings("rawtypes")
 		LinkedList<Edge> Edges = new LinkedList();
 		Iterator<Edge> EdgesIterador;
 		for (int i = 0; i < vertexList.size(); i++) {
@@ -146,6 +149,7 @@ public class GraphAsList extends AbstractGraph {
 	}
 
 	/**Cria um vertice. Caso esse vertice ja exista, lanca excecao**/
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public void addVertex(Vertex v) throws VerticeJaExisteException {
 		if (!existVertex(v.getId())) {

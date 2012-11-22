@@ -5,10 +5,7 @@
 
 package tests;
 
-/**
- *
- * @author Anthonini
- */
+@SuppressWarnings("serial")
 public class ParDeVerticesNaoExistenteException extends Exception{
 
 }
