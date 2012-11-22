@@ -2,6 +2,7 @@ package tests;
 
 import static org.junit.Assert.*;
 import graph.AbstractGraph;
+import graph.ConcreteVertex;
 import graph.Vertex;
 
 import java.util.ArrayList;
@@ -16,29 +17,47 @@ import apifb.GerarGrafo;
 
 public class DepthSearchTest {
 
-	GerarGrafo gerador; //criador do grafo
-	AbstractGraph graph; //grafo concreto
-	Visitor visitor; //visitor vazio. Apenas para a busca iterar.
-	List<Vertex> list; //lista vazia. A busca preenche a lista com os vértices percorridos.
-	
+	GerarGrafo gerador; // criador do grafo
+	AbstractGraph graph; // grafo concreto
+	Visitor visitor; // visitor vazio. Apenas para a busca iterar.
+	List<Vertex> list; // lista vazia. A busca preenche a lista com os vï¿½rtices
+						// percorridos.
+	List<Vertex> list2;
+
 	@Before
 	public void setUp() throws Exception {
-		gerador = new GerarGrafo(); //inicializa o gerador
-		graph = gerador.getGraph(); //gera o grafo concreto
+		gerador = new GerarGrafo(); // inicializa o gerador
+		graph = gerador.getGraph(); // gera o grafo concreto
 		visitor = new VisitorTeste();
-		list = new ArrayList<Vertex>(); 
+		list = new ArrayList<Vertex>();
+		list2 = new ArrayList<Vertex>();
 	}
-	
+
 	@Test
 	public void testBuscaDepth() {
-		
-		//run
+
+		ConcreteVertex vertex1 = new ConcreteVertex("Felipe Cordeiro", null,
+				"1471562174");
+		ConcreteVertex vertex2 = new ConcreteVertex("Camila Franco", null, "2");
+		ConcreteVertex vertex3 = new ConcreteVertex("Cezar Taurion", null,
+				"519889171");
+		ConcreteVertex vertex4 = new ConcreteVertex("TanaÃª Murr", null,
+				"524374587");
+		ConcreteVertex vertex5 = new ConcreteVertex("Adriano Pescada", null,
+				"528026247");
+
+		list2.add(vertex1);
+		list2.add(vertex2);
+		list2.add(vertex3);
+		list2.add(vertex4);
+		list2.add(vertex5);
+
+		// run
 		graph.depthFirstTraversal(visitor, 0, list);
-		
-		//assert
-		for (int i = 0; i< list.size(); i++){
-			System.out.println(list.get(i).getName());
+
+		// assert
+		for (int i = 0; i < list2.size(); i++) {
+			assertEquals(list.get(i).getName(), list2.get(i).getName());
 		}
-		assertEquals(true,!list.isEmpty());
 	}
 }
