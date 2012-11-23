@@ -45,7 +45,6 @@ public class GerarGrafo {
 			enderecos.add("/home/felipe/nomes_" + usuarios.get(i) + ".txt");
 			enderecos.add("/home/felipe/aniversarios_" + usuarios.get(i)
 					+ ".txt");
-			System.out.println(enderecos.get(i));
 		}
 		
 	}
@@ -69,7 +68,7 @@ public class GerarGrafo {
 	}
 
 	/** Povoa o grafo **/
-	private void Povoar() throws IOException, VerticeJaExisteException,
+	private void Povoar() throws IOException,
 			ParDeVerticesNaoExistenteException, FileNotFoundException {
 		
 		for (int i = 0; i < enderecos.size();) {
@@ -88,7 +87,10 @@ public class GerarGrafo {
 					ConcreteVertex vertex = new ConcreteVertex(
 							in_nomes.readLine(),
 							process(in_aniversarios.readLine()), id);
-					graph.addVertex(vertex);
+					try{
+						graph.addVertex(vertex);
+					} catch (VerticeJaExisteException e) {
+					}
 					user = graph.searchVertex(id);
 					primeiraLinha = false;
 				} else {
@@ -96,7 +98,10 @@ public class GerarGrafo {
 							in_nomes.readLine(),
 							process(in_aniversarios.readLine()),
 							in_ids.readLine());
+					try{
 					graph.addVertex(vertex);
+					} catch (VerticeJaExisteException e) {
+					}
 					Edge edge = new ConcreteEdge(user,
 							graph.searchVertex(vertex.getId()));
 					graph.addEdge(edge);
@@ -104,8 +109,6 @@ public class GerarGrafo {
 			}
 		}
 
-		//Coloca as arestas no grafo.
-		graph.setAdjacencyList(graph.getEdges());
 
 	}
 	
