@@ -1,5 +1,6 @@
 package graph;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 
 import visitor.Visitable;
@@ -31,14 +32,21 @@ public class ConcreteVertex implements Vertex, Visitable {
 		// TODO Auto-generated method stub
 		return id;
 	}
-	
-	/**Retorna uma lista de vertices com os vizinhos**/
+
+	/** Retorna uma lista de vertices com os vizinhos **/
 	@Override
 	public LinkedList<Vertex> getVizinhos() {
 		return listVertex;
 	}
+	
+	public Iterator<Vertex> getVizinhosIterador() {
+		return listVertex.listIterator();
+	}
 
-	/**Chama metodo visit do visitor passado por parametro se passando como parametro**/
+	/**
+	 * Chama metodo visit do visitor passado por parametro se passando como
+	 * parametro
+	 **/
 	@Override
 	public void accept(Visitor visitor) {
 		visitor.visit(this);
