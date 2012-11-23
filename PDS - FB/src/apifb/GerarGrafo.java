@@ -28,7 +28,7 @@ public class GerarGrafo {
 	BufferedReader in_nomes;
 	BufferedReader in_aniversarios;
 
-	/** Inicializa a lista de usu�rios e os diret�rios para a cria��o dos grafos **/
+	/** Inicializa a lista de usuarios e os diretorios para a criacao dos grafos **/
 	public GerarGrafo() {
 
 		usuarios.add("felipecordeiroalves");
@@ -41,9 +41,9 @@ public class GerarGrafo {
 		 * Para Windows, usar dupla barra invertida (\\)
 		 * ex.: C:\\Users\\Public\\Documents\\Entrada   */
 		for (int i = 0; i < usuarios.size(); i++) {
-			enderecos.add("/home/felipe/ids_" + usuarios.get(i) + ".txt");
-			enderecos.add("/home/felipe/nomes_" + usuarios.get(i) + ".txt");
-			enderecos.add("/home/felipe/aniversarios_" + usuarios.get(i)
+			enderecos.add("C:\\pdsfb\\txts\\ids_" + usuarios.get(i) + ".txt");
+			enderecos.add("C:\\pdsfb\\txts\\nomes_" + usuarios.get(i) + ".txt");
+			enderecos.add("C:\\pdsfb\\txts\\aniversarios_" + usuarios.get(i)
 					+ ".txt");
 		}
 		
@@ -112,7 +112,7 @@ public class GerarGrafo {
 
 	}
 	
-	/** Retorna um grafo constru�do e povoado. **/
+	/** Retorna um grafo construido e povoado. **/
 	public AbstractGraph getGraph() throws FileNotFoundException, IOException, VerticeJaExisteException, ParDeVerticesNaoExistenteException{
 		Povoar();
 		return graph;
