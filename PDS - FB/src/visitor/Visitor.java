@@ -1,6 +1,6 @@
 package visitor;
 
-import graph.*;
+import grafo.*;
 
 public interface Visitor {
 	public void visit(ConcreteVertex vertice);

@@ -1,10 +1,10 @@
 package visitor;
 
-import graph.*;
+import grafo.*;
 
 public class VisitorAniversario implements Visitor {
 
-	/**Imprime o nome e o dia do aniversário do vértice**/
+	/**Imprime o nome e o dia do aniversï¿½rio do vï¿½rtice**/
 	public void visit(ConcreteVertex vertice) {
 		System.out.println("Nome: " + vertice.getName() + "\nAniversÃ¡rio: "
 				+ vertice.getBirthday().getDia() + "\n");
