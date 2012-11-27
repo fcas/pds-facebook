@@ -1,8 +1,8 @@
 package tests;
 
 import static org.junit.Assert.*;
-import graph.AbstractGraph;
-import graph.Vertex;
+import grafo.AbstractGraph;
+import grafo.Vertex;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +12,7 @@ import org.junit.Test;
 
 import visitor.Visitor;
 import visitor.VisitorTeste;
-import apifb.GerarGrafo;
+import grafo.GerarGrafo;
 
 public class SearchsTest {
 
@@ -26,7 +26,7 @@ public class SearchsTest {
 	@Before
 	public void setUp() throws Exception {
 		gerador = new GerarGrafo(); // inicializa o gerador
-		graph = gerador.getGraph(); // gera o grafo concreto
+		graph = gerador.getInstance(); // gera o grafo concreto
 		visitor = new VisitorTeste();
 		list = new ArrayList<Vertex>();
 		list2 = new ArrayList<Vertex>();

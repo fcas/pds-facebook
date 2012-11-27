@@ -2,12 +2,12 @@ package tests;
 
 
 import static org.junit.Assert.assertEquals;
-import graph.AbstractGraph;
-import graph.ConcreteEdge;
-import graph.ConcreteVertex;
-import graph.Edge;
-import graph.GraphAsList;
-import graph.Vertex;
+import grafo.AbstractGraph;
+import grafo.ConcreteEdge;
+import grafo.ConcreteVertex;
+import grafo.Edge;
+import grafo.GraphAsList;
+import grafo.Vertex;
 
 import java.util.ArrayList;
 import java.util.List;

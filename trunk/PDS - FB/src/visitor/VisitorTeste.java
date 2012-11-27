@@ -1,7 +1,7 @@
 package visitor;
 
 import visitor.Visitor;
-import graph.ConcreteVertex;
+import grafo.ConcreteVertex;
 
 
 public class VisitorTeste implements Visitor{
