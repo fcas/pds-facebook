@@ -15,6 +15,7 @@ import com.restfb.types.User;
 import grafo.GerarGrafo;
 import grafo.Vertex;
 
+import java.awt.Desktop;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
