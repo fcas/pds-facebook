@@ -25,7 +25,8 @@ public class Teste {
 
 		AbstractGraph graph = gerarGrafo.getInstance();
 
-		List<Vertex> list = graph.sugerirAmigos("Rodrigo Cordeiro");
+		
+		List<Vertex> list = graph.sugerirAmigos("AnderShow Rodrigues");
 
 		for (int i = 0; i < list.size(); i++) {
 			System.out.println(list.get(i).getName());

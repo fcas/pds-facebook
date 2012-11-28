@@ -12,7 +12,7 @@ import tests.VerticeJaExisteException;
 
 public class GerarGrafo {
 	
-	private final String caminhoArquivo = "/home/felipe/";
+	private final String caminhoArquivo = "c:\\pdsfb\\txts\\";
 
 	private List<String> usuarios = new ArrayList<String>();
 	private List<String> arquivos = new ArrayList<String>();

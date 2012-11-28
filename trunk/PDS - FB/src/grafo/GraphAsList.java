@@ -43,11 +43,11 @@ public class GraphAsList extends AbstractGraph {
 		int cont = 0;
 		
 		for (int i = 0; i < nome.getVizinhos().size(); i++) {
-			for (int j = 0; j < nome.getVizinhos().get(i).getVizinhos().size(); j++) {
+			for (int j = 0; j < nome.getVizinhos().get(i).getVizinhos().size(); j++)
+			{
 				String aux = nome.getVizinhos().get(i).getVizinhos().get(j).getName();
-				if (!(aux.equals(nome.getName())) && aux.equals(amigo.getName())) {
+				if (!(aux.equals(nome.getName())) && aux.equals(amigo.getName()))
 					cont++;
-				}
 			}
 		}
 		
@@ -56,31 +56,50 @@ public class GraphAsList extends AbstractGraph {
 	}
 	
 
-	public List<Vertex> sugerirAmigos(String nome) {
+	public List<Vertex> sugerirAmigos(String nome)
+	{
 
-		List<Vertex> listaPonteciaisAmigos = new ArrayList<Vertex>();
+		List<Vertex> listaPotenciaisAmigos = new ArrayList<Vertex>();
 		Vertex vertex = null;
 		Vertex amigo;
 
 		// busca o vertice contendo nome
-		for (int i = 0; i < super.listVertex.size(); i++) {
-			if (nome.equals(super.listVertex.get(i).getName())) {
+		for (int i = 0; i < super.listVertex.size(); i++)
+		{
+			if (nome.equals(super.listVertex.get(i).getName()))
+			{
 				vertex = super.listVertex.get(i);
 			}
 		}
 			
 		//varre os amigos de nome
-		for (int j = 0; j < vertex.getVizinhos().size(); j++) {
+		for (int j = 0; j < vertex.getVizinhos().size(); j++)
+		{
 			//varre os amigos dos amigos de nome
-			for (int k = 0; k < vertex.getVizinhos().get(j).getVizinhos().size(); k++) {
+			for (int k = 0; k < vertex.getVizinhos().get(j).getVizinhos().size(); k++)
+			{
 			   amigo = vertex.getVizinhos().get(j).getVizinhos().get(k);
-			   if(verificaRepeticoes(vertex, amigo) > 1){
-				   listaPonteciaisAmigos.add(amigo);
+			   if(verificaRepeticoes(vertex, amigo) > 2)
+			   {
+				   if (!listaPotenciaisAmigos.contains(amigo)){
+					   System.out.println("adicionando "+ amigo.getName());
+					   listaPotenciaisAmigos.add(amigo);
+				   }
+					   
+				   
 			   }
 			}
 		}
 		
-		return listaPonteciaisAmigos;
+		for (int j = 0; j < listaPotenciaisAmigos.size(); j++){
+			if(vertex.getVizinhos().contains(listaPotenciaisAmigos.get(j))){
+				System.out.println("removendo " + listaPotenciaisAmigos.get(j).getName());
+				listaPotenciaisAmigos.remove(listaPotenciaisAmigos.get(j));
+			}
+		}
+			
+		
+		return listaPotenciaisAmigos;
 
 	}
 
