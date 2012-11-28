@@ -11,7 +11,7 @@ public class DaoUsuario extends DaoFactory {
 	
 	private static DaoUsuario instance = null;
 	
-	private final String caminhoArquivo = "/home/larissa/workspace2/";
+	private final String caminhoArquivo = "/home/felipe/";
 	private BufferedWriter arquivoId;
 	private BufferedWriter arquivoNome;
 	

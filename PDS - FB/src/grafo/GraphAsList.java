@@ -27,7 +27,7 @@ public class GraphAsList extends AbstractGraph {
 		}
 		return retorno;
 	}
-	
+
 	public List<Vertex> buscarVerticeNome(String nome) {
 		List<Vertex> listaVertices = new ArrayList<Vertex>();
 		for (int i = 0; i < super.listVertex.size(); i++) {
@@ -36,6 +36,52 @@ public class GraphAsList extends AbstractGraph {
 			}
 		}
 		return listaVertices;
+	}
+
+	public int verificaRepeticoes(Vertex nome, Vertex amigo){
+		
+		int cont = 0;
+		
+		for (int i = 0; i < nome.getVizinhos().size(); i++) {
+			for (int j = 0; j < nome.getVizinhos().get(i).getVizinhos().size(); j++) {
+				String aux = nome.getVizinhos().get(i).getVizinhos().get(j).getName();
+				if (!(aux.equals(nome.getName())) && aux.equals(amigo.getName())) {
+					cont++;
+				}
+			}
+		}
+		
+		return cont;
+
+	}
+	
+
+	public List<Vertex> sugerirAmigos(String nome) {
+
+		List<Vertex> listaPonteciaisAmigos = new ArrayList<Vertex>();
+		Vertex vertex = null;
+		Vertex amigo;
+
+		// busca o vertice contendo nome
+		for (int i = 0; i < super.listVertex.size(); i++) {
+			if (nome.equals(super.listVertex.get(i).getName())) {
+				vertex = super.listVertex.get(i);
+			}
+		}
+			
+		//varre os amigos de nome
+		for (int j = 0; j < vertex.getVizinhos().size(); j++) {
+			//varre os amigos dos amigos de nome
+			for (int k = 0; k < vertex.getVizinhos().get(j).getVizinhos().size(); k++) {
+			   amigo = vertex.getVizinhos().get(j).getVizinhos().get(k);
+			   if(verificaRepeticoes(vertex, amigo) > 1){
+				   listaPonteciaisAmigos.add(amigo);
+			   }
+			}
+		}
+		
+		return listaPonteciaisAmigos;
+
 	}
 
 	/**
@@ -84,6 +130,7 @@ public class GraphAsList extends AbstractGraph {
 			throw new ParDeVerticesNaoExistenteException();
 		}
 	}
+
 	/**
 	 * Percorre o grafo em profundidade, chamando o visitor passado por
 	 * parametro
@@ -110,6 +157,5 @@ public class GraphAsList extends AbstractGraph {
 			throw new VerticeJaExisteException();
 		}
 	}
-	
 
 }

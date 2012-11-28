@@ -25,5 +25,7 @@ public interface Graph {
 	public boolean existVertex(String id);
 	
 	public List<Vertex> buscarVerticeNome(String nome);
+	
+	public List<Vertex> sugerirAmigos(String nome);
 
 }
