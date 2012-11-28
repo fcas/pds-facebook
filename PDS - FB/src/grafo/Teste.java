@@ -25,8 +25,12 @@ public class Teste {
 
 		AbstractGraph graph = gerarGrafo.getInstance();
 
+//		Vertex show = graph.searchVertex("853439768");
+//		
+//		for(int i = 0; i<show.getVizinhos().size(); i++)
+//			System.out.println(show.getVizinhos().get(i).getName());
 		
-		List<Vertex> list = graph.sugerirAmigos("AnderShow Rodrigues");
+		List<Vertex> list = graph.sugerirAmigos("Dalay Almeida");
 
 		for (int i = 0; i < list.size(); i++) {
 			System.out.println(list.get(i).getName());
