@@ -91,10 +91,10 @@ public class GraphAsList extends AbstractGraph {
 			}
 		}
 		
-		for (int j = 0; j < listaPotenciaisAmigos.size(); j++){
-			if(vertex.getVizinhos().contains(listaPotenciaisAmigos.get(j))){
-				System.out.println("removendo " + listaPotenciaisAmigos.get(j).getName());
-				listaPotenciaisAmigos.remove(listaPotenciaisAmigos.get(j));
+		for (int j = 0; j < vertex.getVizinhos().size(); j++){
+			if(listaPotenciaisAmigos.contains(vertex.getVizinhos().get(j))){
+				System.out.println("removendo " + vertex.getVizinhos().get(j).getName());
+				listaPotenciaisAmigos.remove(vertex.getVizinhos().get(j));
 			}
 		}
 			
