@@ -24,10 +24,12 @@ public interface Graph {
 
 	public boolean existVertex(String id);
 	
-	public List<Vertex> buscarVerticeNome(String nome);
+	public List<Vertex> buscarListaNomes(String nome);
 	
 	public int verificaRepeticoes(Vertex nome, Vertex amigo);
 	
 	public List<Vertex> sugerirAmigos(String nome);
+	
+	public Vertex searchVertexNome (String nome);
 
 }
