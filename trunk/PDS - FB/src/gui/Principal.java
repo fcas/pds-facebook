@@ -18,7 +18,6 @@ import model.Ranking;
 import model.UsuarioApi;
 
 /**
- *
  * @author larissa
  */
 public class Principal extends javax.swing.JFrame {

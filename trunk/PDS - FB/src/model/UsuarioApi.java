@@ -174,7 +174,7 @@ public class UsuarioApi implements IUsuario {
         Connection<Page> conexao = Cliente.getInstance().fetchConnection("me/likes", Page.class);
         List<Page> minhasPaginas = conexao.getData();
         
-        List<IPagina> listaPaginas = new ArrayList<IPagina>();;
+        List<IPagina> listaPaginas = new ArrayList<IPagina>();
         
         for (int i=0; i<minhasPaginas.size(); i++) {
 //            Page p = Cliente.getInstance().fetchObject(minhasPaginas.get(i).getId(),
