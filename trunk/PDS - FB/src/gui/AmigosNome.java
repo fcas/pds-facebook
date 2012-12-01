@@ -6,9 +6,12 @@ package gui;
 
 import grafo.Vertex;
 
+import java.awt.Desktop;
 import java.awt.Font;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -30,6 +33,28 @@ public class AmigosNome extends javax.swing.JPanel {
     public AmigosNome() {
         initComponents();
         menu_amigosnome.setFont(menu_amigosinterajo.getFont().deriveFont(Font.BOLD));
+        cliqueCelula();
+    }
+    
+    
+    private void cliqueCelula() {
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            @SuppressWarnings("unused")
+			public void mouseClicked(java.awt.event.MouseEvent e) {
+                int row = jTable1.rowAtPoint(e.getPoint());
+                int col = jTable1.columnAtPoint(e.getPoint());
+                
+                Desktop d = Desktop.getDesktop(); 
+                try { 
+                	d.browse(new URI("http://"+jTable1.getValueAt(row, 1).toString())); 
+                } catch ( IOException e1 ) { 
+                	System.out.println(e1); 
+                } catch ( URISyntaxException e2 ) { 
+                	System.out.println(e2); 
+                }
+                
+            }
+        }); 
     }
 
     /**

@@ -4,7 +4,11 @@
  */
 package gui;
 
+import java.awt.Desktop;
 import java.awt.Font;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -29,17 +33,26 @@ public class PaginaPalavraChave extends javax.swing.JPanel {
         cliqueCelula();
     }
 
-        private void cliqueCelula() {
+    @SuppressWarnings("unused")
+    private void cliqueCelula() {
         jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent e) {
                 int row = jTable2.rowAtPoint(e.getPoint());
-                @SuppressWarnings("unused")
 				int col = jTable2.columnAtPoint(e.getPoint());
                 
-                System.out.println(linksPaginas.get(row).toString());//abrir em navegador
+                //System.out.println(linksPaginas.get(row).toString());//abrir em navegador
+                
+                Desktop d = Desktop.getDesktop(); 
+                try {
+                	d.browse(new URI(linksPaginas.get(row).toString())); 
+                } catch ( IOException e1 ) { 
+                	System.out.println(e1);
+                } catch ( URISyntaxException e2 ) { 
+                	System.out.println(e2);
+                }
                 
             }
-        }); 
+        });
     }
     /**
      * This method is called from within the constructor to initialize the form.
