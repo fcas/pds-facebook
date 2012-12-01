@@ -80,7 +80,6 @@ public class GerarGrafo {
 			in_nomes = new BufferedReader(new FileReader(arquivos.get(i++)));
 			in_aniversarios = new BufferedReader(new FileReader(
 					arquivos.get(i++)));
-
 			boolean primeiraLinha = true;
 			String id = in_ids.readLine();
 			Vertex user = null;
