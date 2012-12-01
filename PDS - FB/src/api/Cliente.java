@@ -13,7 +13,7 @@ import com.restfb.FacebookClient;
  */
 public class Cliente {
 
-    static String token = "AAACEdEose0cBANZCZBrk466DpaMWDbhhcuL3Bu1kmhvlspuViWx6bmZB7YhtY0weoHHcpdWQWHhTApt6xxukrNRahJ1TpDlZC8GYG3nUEQZDZD";
+    static String token = "AAACEdEose0cBAC3cayZCc3InasCMsH6rV7MWmWZCb8FNYLQtOb0zhbcLmWOpUSvuZBy3bQU7BOQfOQEWoDjVBFWakWWF08tM4aXaCVhzFMgVt3DQIk0";
     private static FacebookClient facebookClient = null;
 
     private Cliente() {
