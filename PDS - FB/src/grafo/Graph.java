@@ -24,7 +24,7 @@ public interface Graph {
 
 	public boolean existVertex(String id);
 	
-	public List<Vertex> buscarListaNomes(String nome);
+	public List<Vertex> buscarVerticeNome(String nome);
 	
 	public int verificaRepeticoes(Vertex nome, Vertex amigo);
 	
