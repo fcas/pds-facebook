@@ -46,5 +46,9 @@ public interface IUsuario {
 	
 	public List<String> getAmigosNomes();
 	
+	public Ranking getRanking();
+	
 	public List<Vertex> buscarAmigos(String nome) throws FileNotFoundException, IOException, VerticeJaExisteException, ParDeVerticesNaoExistenteException;//ajeitar o nome
+
+	public List<String> buscarAmigosMaiorAfinidade() throws FileNotFoundException, IOException, VerticeJaExisteException, ParDeVerticesNaoExistenteException;;
 }
