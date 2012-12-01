@@ -20,7 +20,7 @@ public class Teste {
 	public static void main(String[] args) throws FileNotFoundException,
 			IOException, VerticeJaExisteException,
 			ParDeVerticesNaoExistenteException {
-
+		
 		usuarioFelipe = new UsuarioApi("felipecordeiroalves");
 		gerarGrafo = new GerarGrafo(); 
 
