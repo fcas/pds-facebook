@@ -50,5 +50,7 @@ public interface IUsuario {
 	
 	public List<Vertex> buscarAmigos(String nome) throws FileNotFoundException, IOException, VerticeJaExisteException, ParDeVerticesNaoExistenteException;//ajeitar o nome
 
-	public List<String> buscarAmigosMaiorAfinidade() throws FileNotFoundException, IOException, VerticeJaExisteException, ParDeVerticesNaoExistenteException;;
+	public List<String> buscarAmigosMaiorAfinidade() throws FileNotFoundException, IOException, VerticeJaExisteException, ParDeVerticesNaoExistenteException;
+
+	public List<IPagina> recomendarPaginas() throws IOException, VerticeJaExisteException, ParDeVerticesNaoExistenteException;
 }
