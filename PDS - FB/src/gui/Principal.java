@@ -115,27 +115,27 @@ public class Principal extends javax.swing.JFrame {
     public static void main(String args[]) throws FileNotFoundException, IOException, ParDeVerticesNaoExistenteException {
     	
 //    	IUsuario usuarioFelipe = new UsuarioApi("felipecordeiroalves");
-    	usuarioLarissa = new UsuarioApi("larissabatistaleite");
+    	usuarioLarissa = new UsuarioApi("showrodrigues");
 //    	IUsuario usuarioAnderson = new UsuarioApi("showrodrigues");
     	gerarGrafo = new GerarGrafo();
     	
-    	try {
-			usuarioLarissa.buscarAmigosMaiorAfinidade();
-			
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (VerticeJaExisteException e) {
-			e.printStackTrace();
-		} catch (ParDeVerticesNaoExistenteException e) {
-			e.printStackTrace();
-		}
-    	
-    	Ranking ranking = usuarioLarissa.getRanking();
-    	for (int i=ranking.getLista().size()-1; i>-1; i--) {
-    		System.out.println(ranking.getLista().get(i).getNome() + "  " + ranking.getLista().get(i).getPontos());
-    	}
+//    	try {
+//			usuarioLarissa.buscarAmigosMaiorAfinidade();
+//			
+//		} catch (FileNotFoundException e) {
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		} catch (VerticeJaExisteException e) {
+//			e.printStackTrace();
+//		} catch (ParDeVerticesNaoExistenteException e) {
+//			e.printStackTrace();
+//		}
+//    	
+//    	Ranking ranking = usuarioLarissa.getRanking();
+//    	for (int i=ranking.getLista().size()-1; i>-1; i--) {
+//    		System.out.println(ranking.getLista().get(i).getNome() + "  " + ranking.getLista().get(i).getPontos());
+//    	}
 //    	//System.out.println(usuarioFelipe.getUsername()+ "  " + usuarioFelipe.getCidadeNatal());
 //    	DaoFactory factory = DaoFactory.createDaoFactory(0);
     	
