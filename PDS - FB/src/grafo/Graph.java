@@ -26,6 +26,8 @@ public interface Graph {
 	
 	public List<Vertex> buscarVerticeNome(String nome);
 	
+	public int verificaRepeticoes(Vertex nome, Vertex amigo);
+	
 	public List<Vertex> sugerirAmigos(String nome);
 
 }

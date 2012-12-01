@@ -14,6 +14,7 @@ import tests.VerticeJaExisteException;
 public class Teste {
 
 	private static GerarGrafo gerarGrafo;
+	@SuppressWarnings("unused")
 	private static IUsuario usuarioFelipe;
 
 	public static void main(String[] args) throws FileNotFoundException,
@@ -23,13 +24,9 @@ public class Teste {
 		usuarioFelipe = new UsuarioApi("felipecordeiroalves");
 		gerarGrafo = new GerarGrafo(); 
 
+		@SuppressWarnings("static-access")
 		AbstractGraph graph = gerarGrafo.getInstance();
 
-//		Vertex show = graph.searchVertex("853439768");
-//		
-//		for(int i = 0; i<show.getVizinhos().size(); i++)
-//			System.out.println(show.getVizinhos().get(i).getName());
-		
 		List<Vertex> list = graph.sugerirAmigos("Dalay Almeida");
 
 		for (int i = 0; i < list.size(); i++) {
