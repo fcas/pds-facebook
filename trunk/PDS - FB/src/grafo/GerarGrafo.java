@@ -11,8 +11,8 @@ import tests.ParDeVerticesNaoExistenteException;
 import tests.VerticeJaExisteException;
 
 public class GerarGrafo {
-	
-	private final String caminhoArquivo = "c:\\pdsfb\\txts\\";
+		
+	private final String caminhoArquivo = System.getProperty("user.dir") + System.getProperty("file.separator");
 
 	private List<String> usuarios = new ArrayList<String>();
 	private List<String> arquivos = new ArrayList<String>();
