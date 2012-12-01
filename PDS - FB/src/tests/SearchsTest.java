@@ -16,7 +16,6 @@ import grafo.GerarGrafo;
 
 public class SearchsTest {
 
-	GerarGrafo gerador; // criador do grafo
 	AbstractGraph graph; // grafo concreto
 	Visitor visitor; // visitor vazio. Apenas para a busca iterar.
 	List<Vertex> list; // lista vazia. A busca preenche a lista com os v�rtices
@@ -25,8 +24,7 @@ public class SearchsTest {
 
 	@Before
 	public void setUp() throws Exception {
-		gerador = new GerarGrafo(); // inicializa o gerador
-		graph = gerador.getInstance(); // gera o grafo concreto
+		graph = GerarGrafo.getInstance(); // gera o grafo concreto
 		visitor = new VisitorTeste();
 		list = new ArrayList<Vertex>();
 		list2 = new ArrayList<Vertex>();
