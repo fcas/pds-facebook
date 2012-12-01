@@ -10,8 +10,7 @@ import model.IUsuario;
 public class DaoUsuario extends DaoFactory {
 	
 	private static DaoUsuario instance = null;
-	
-	private final String caminhoArquivo = "/home/felipe/";
+	private final String caminhoArquivo = System.getProperty("user.dir") + System.getProperty("file.separator");
 	private BufferedWriter arquivoId;
 	private BufferedWriter arquivoNome;
 	
