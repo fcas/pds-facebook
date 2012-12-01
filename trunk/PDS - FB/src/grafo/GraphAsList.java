@@ -26,8 +26,19 @@ public class GraphAsList extends AbstractGraph {
 		}
 		return retorno;
 	}
+	
+	@Override
+	public Vertex searchVertexNome (String nome) {
+		Vertex retorno = null;
+		for (int i = 0; i < super.listVertex.size(); i++) {
+			if (nome.equals(super.listVertex.get(i).getName())) {
+				retorno = super.listVertex.get(i);
+			}
+		}
+		return retorno;
+	}
 
-	public List<Vertex> buscarVerticeNome(String nome) {
+	public List<Vertex> buscarListaNomes(String nome) {
 		List<Vertex> listaVertices = new ArrayList<Vertex>();
 		for (int i = 0; i < super.listVertex.size(); i++) {
 			if ((super.listVertex.get(i).getName()).contains(nome)) {
