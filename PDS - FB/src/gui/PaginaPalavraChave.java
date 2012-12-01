@@ -16,7 +16,6 @@ import model.IPagina;
 import model.IUsuario;
 
 /**
- *
  * @author larissa
  */
 public class PaginaPalavraChave extends javax.swing.JPanel {
@@ -24,6 +23,7 @@ public class PaginaPalavraChave extends javax.swing.JPanel {
 	
 	private IUsuario usuario = Principal.getUsuario();
     private List<String> linksPaginas;
+    
     /**
      * Creates new form PaginaPalavraChave
      */
