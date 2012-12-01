@@ -16,6 +16,7 @@ import tests.VerticeJaExisteException;
 import api.DaoFactory;
 
 import model.IUsuario;
+import model.Ranking;
 import model.UsuarioApi;
 
 /**
@@ -26,7 +27,7 @@ public class Principal extends javax.swing.JFrame {
 
     private static CardLayout cl;
     private static GerarGrafo gerarGrafo;
-    private static IUsuario usuarioFelipe;
+    private static IUsuario usuarioLarissa;
     
     public Principal() {
         initComponents();
@@ -63,7 +64,7 @@ public class Principal extends javax.swing.JFrame {
     }
     
     public static IUsuario getUsuario() {
-    	return usuarioFelipe;
+    	return usuarioLarissa;
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -113,22 +114,28 @@ public class Principal extends javax.swing.JFrame {
      */
     public static void main(String args[]) throws FileNotFoundException, IOException, ParDeVerticesNaoExistenteException {
     	
-//    	IUsuario usuarioLarissa = new UsuarioApi("larissabatistaleite");
-    	usuarioFelipe = new UsuarioApi("felipecordeiroalves");
+//    	IUsuario usuarioFelipe = new UsuarioApi("felipecordeiroalves");
+    	usuarioLarissa = new UsuarioApi("larissabatistaleite");
 //    	IUsuario usuarioAnderson = new UsuarioApi("showrodrigues");
     	gerarGrafo = new GerarGrafo();
     	
-//    	try {
-//			usuarioFelipe.buscarAmigos("Maria");
-//		} catch (FileNotFoundException e) {
-//			e.printStackTrace();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		} catch (VerticeJaExisteException e) {
-//			e.printStackTrace();
-//		} catch (ParDeVerticesNaoExistenteException e) {
-//			e.printStackTrace();
-//		}
+    	try {
+			usuarioLarissa.buscarAmigosMaiorAfinidade();
+			
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (VerticeJaExisteException e) {
+			e.printStackTrace();
+		} catch (ParDeVerticesNaoExistenteException e) {
+			e.printStackTrace();
+		}
+    	
+    	Ranking ranking = usuarioLarissa.getRanking();
+    	for (int i=ranking.getLista().size()-1; i>-1; i--) {
+    		System.out.println(ranking.getLista().get(i).getNome() + "  " + ranking.getLista().get(i).getPontos());
+    	}
 //    	//System.out.println(usuarioFelipe.getUsername()+ "  " + usuarioFelipe.getCidadeNatal());
 //    	DaoFactory factory = DaoFactory.createDaoFactory(0);
     	
