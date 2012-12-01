@@ -5,22 +5,39 @@
 package gui;
 
 import java.awt.Font;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
+import model.IPagina;
+import model.IUsuario;
 
 /**
  *
  * @author larissa
  */
 public class PaginaPalavraChave extends javax.swing.JPanel {
-
+    private IUsuario usuario = Principal.getUsuario();
+    private List<String> linksPaginas;
     /**
      * Creates new form PaginaPalavraChave
      */
     public PaginaPalavraChave() {
         initComponents();
         menu_paginaspalavra.setFont(menu_amigosinterajo.getFont().deriveFont(Font.BOLD));
-
+        cliqueCelula();
     }
 
+        private void cliqueCelula() {
+        jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent e) {
+                int row = jTable2.rowAtPoint(e.getPoint());
+                int col = jTable2.columnAtPoint(e.getPoint());
+                
+                System.out.println(linksPaginas.get(row).toString());//abrir em navegador
+                
+            }
+        }); 
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -44,8 +61,8 @@ public class PaginaPalavraChave extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jButton4 = new javax.swing.JButton();
+        palavra = new javax.swing.JTextField();
+        buscar = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
@@ -180,10 +197,15 @@ public class PaginaPalavraChave extends javax.swing.JPanel {
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Digite a palavra:");
 
-        jButton4.setBackground(new java.awt.Color(1, 63, 119));
-        jButton4.setFont(new java.awt.Font("FreeSans", 0, 14)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(255, 255, 255));
-        jButton4.setText("Buscar");
+        buscar.setBackground(new java.awt.Color(1, 63, 119));
+        buscar.setFont(new java.awt.Font("FreeSans", 0, 14)); // NOI18N
+        buscar.setForeground(new java.awt.Color(255, 255, 255));
+        buscar.setText("Buscar");
+        buscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscarActionPerformed(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("FreeSans", 0, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
@@ -191,6 +213,60 @@ public class PaginaPalavraChave extends javax.swing.JPanel {
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
                 {null, null},
                 {null, null},
                 {null, null},
@@ -225,9 +301,9 @@ public class PaginaPalavraChave extends javax.swing.JPanel {
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(palavra, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(93, 93, 93)
                         .addComponent(jLabel5)))
@@ -239,8 +315,8 @@ public class PaginaPalavraChave extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4))
+                    .addComponent(palavra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buscar))
                 .addGap(16, 16, 16)
                 .addComponent(jLabel5)
                 .addGap(18, 18, 18)
@@ -295,9 +371,37 @@ public class PaginaPalavraChave extends javax.swing.JPanel {
         Principal.PaginasRecomendadas();
     }//GEN-LAST:event_menu_paginasrecomendadasActionPerformed
 
+    private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
+    	if (palavra.getText().equals("")) {
+        } else {
+            preencherTabela(usuario.buscarPaginasPalavraChave(palavra.getText())); 
+        }
+    }//GEN-LAST:event_buscarActionPerformed
+
+    private void preencherTabela(List<IPagina> listaPaginas) {
+
+        limparTabela();
+        linksPaginas = new ArrayList<String>();
+        if (listaPaginas.isEmpty() || listaPaginas == null) {
+           JOptionPane.showMessageDialog(this, "Nenhuma página encontrada!");
+        } else {
+            for (int i=0; i< listaPaginas.size(); i++) {
+                    jTable2.setValueAt(listaPaginas.get(i).getNome(), i, 0);
+                    jTable2.setValueAt(listaPaginas.get(i).getCategoria(), i, 1);
+                    linksPaginas.add(listaPaginas.get(i).getLink());
+            }
+        }
+    }
+        
+    private void limparTabela() {
+        for (int i=0; i<jTable2.getRowCount(); i++) {
+            jTable2.setValueAt("", i, 0);
+            jTable2.setValueAt("", i, 1);
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton buscar;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -308,12 +412,12 @@ public class PaginaPalavraChave extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JButton menu_amigos;
     private javax.swing.JButton menu_amigosinterajo;
     private javax.swing.JButton menu_amigosnome;
     private javax.swing.JButton menu_paginas;
     private javax.swing.JButton menu_paginaspalavra;
     private javax.swing.JButton menu_paginasrecomendadas;
+    private javax.swing.JTextField palavra;
     // End of variables declaration//GEN-END:variables
 }
