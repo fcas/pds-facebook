@@ -74,7 +74,7 @@ public class GenericTraversalTest {
 		vertex11 = new ConcreteVertex("11", null,
 				"11");
 		
-		//adicao dos vertices
+		//adicao dos verticesj
 		graph2.addVertex(vertex0);
 		graph2.addVertex(vertex1);
 		graph2.addVertex(vertex1111);
