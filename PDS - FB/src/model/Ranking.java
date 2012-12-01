@@ -7,10 +7,10 @@ import java.util.List;
 
 public class Ranking {
 	/*NO VERTICE DO GRAFO, DETERMINAR A QUANTIDADE DE PONTOS QUE ELE TEM, PRA PODER FAZER O RANKING.
-	 * CADA COISA EM COMUM: PÁGINA, GRUPO E ALGUM COMENTARIO EM POSTS. CADA UM VALE 1 PONTO
+	 * CADA COISA EM COMUM: PAGINA, GRUPO E ALGUM COMENTARIO EM POSTS. CADA UM VALE 1 PONTO
 	 */
 	
-	private List<AmigoRanking> lista = new ArrayList();
+	private List<AmigoRanking> lista = new ArrayList<AmigoRanking>();
 
 	public List<AmigoRanking> getLista() {
 		return lista;

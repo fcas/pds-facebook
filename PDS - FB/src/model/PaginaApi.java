@@ -4,12 +4,6 @@
  */
 package model;
 
-import api.Cliente;
-import com.restfb.Connection;
-import com.restfb.Parameter;
-import com.restfb.types.Page;
-import java.util.List;
-
 /**
  *
  * @author larissa
