@@ -3,16 +3,12 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-import api.Cliente;
-
-import com.restfb.Connection;
 import com.restfb.types.Comment;
-import com.restfb.types.Post;
 
 public class PostApi implements IPost {
 	
 	private String conteudo;
-	private List<IComentario> listaComentarios = new ArrayList();
+	private List<IComentario> listaComentarios = new ArrayList<IComentario>();
 	
 	public void setConteudo(String conteudo) {
 		this.conteudo = conteudo;

@@ -6,8 +6,6 @@ package model;
 
 import api.Cliente;
 import com.restfb.Connection;
-import com.restfb.DefaultFacebookClient;
-import com.restfb.FacebookClient;
 import com.restfb.Parameter;
 import com.restfb.types.Group;
 import com.restfb.types.Page;
@@ -16,7 +14,6 @@ import com.restfb.types.User;
 import grafo.GerarGrafo;
 import grafo.Vertex;
 
-import java.awt.Desktop;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -44,8 +41,6 @@ public class UsuarioApi implements IUsuario {
     private String username;
     
     private List<IGrupo> listaMeusGrupos = meusGrupos();
-    
-    private List<String> amigosProximos = new ArrayList();
     
     private List<IPagina> paginasCurtidas = buscarPaginasCurtidas();
     
@@ -179,7 +174,7 @@ public class UsuarioApi implements IUsuario {
         Connection<Page> conexao = Cliente.getInstance().fetchConnection("me/likes", Page.class);
         List<Page> minhasPaginas = conexao.getData();
         
-        List<IPagina> listaPaginas = new ArrayList();;
+        List<IPagina> listaPaginas = new ArrayList<IPagina>();;
         
         for (int i=0; i<minhasPaginas.size(); i++) {
 //            Page p = Cliente.getInstance().fetchObject(minhasPaginas.get(i).getId(),
@@ -202,7 +197,7 @@ public class UsuarioApi implements IUsuario {
 		Connection<Group> cgroup = Cliente.getInstance().fetchConnection("me/groups", Group.class);
 		List<Group> lista = cgroup.getData();
 		
-		List<IGrupo> listaMeusGrupos = new ArrayList();
+		List<IGrupo> listaMeusGrupos = new ArrayList<IGrupo>();
 		
 		for (int i=0; i<lista.size(); i++) {
 			IGrupo grupo = new GrupoApi();
@@ -340,7 +335,7 @@ public class UsuarioApi implements IUsuario {
         List<Page> paginasAmigo = conexao.getData();
         
         //System.out.println("AMIGO " + ID + " CURTE " + paginasAmigo.size() + " PAGINAS");
-        List<IPagina> listaPaginas = new ArrayList();
+        List<IPagina> listaPaginas = new ArrayList<IPagina>();
         
         for (int i=0; i<paginasAmigo.size(); i++) {
             //Page p = Cliente.getInstance().fetchObject(paginasAmigo.get(i).getId(),
@@ -354,7 +349,7 @@ public class UsuarioApi implements IUsuario {
             
         }
         
-        List<IPagina> paginasComuns = new ArrayList();
+        List<IPagina> paginasComuns = new ArrayList<IPagina>();
         
 	        for (int i=0; i<paginasCurtidas.size(); i++) {
 	        	for (int j=0; j<listaPaginas.size(); j++) {
@@ -374,7 +369,7 @@ public class UsuarioApi implements IUsuario {
 		Connection<Group> cgroup = Cliente.getInstance().fetchConnection(ID+"/groups", Group.class);
 		List<Group> lista = cgroup.getData();
 		
-		List<IGrupo> gruposAmigo = new ArrayList();
+		List<IGrupo> gruposAmigo = new ArrayList<IGrupo>();
 		
 		for (int i=0; i<lista.size(); i++) {
 			IGrupo grupo = new GrupoApi();
