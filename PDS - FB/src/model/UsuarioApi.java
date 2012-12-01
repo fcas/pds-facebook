@@ -270,7 +270,7 @@ public class UsuarioApi implements IUsuario {
 
 	public List<Vertex> buscarAmigos(String nome) throws FileNotFoundException, IOException, VerticeJaExisteException, ParDeVerticesNaoExistenteException {
 		
-		List<Vertex> listaVertices = GerarGrafo.getInstance().buscarVerticeNome(nome);
+		List<Vertex> listaVertices = GerarGrafo.getInstance().buscarListaNomes(nome);
 		//System.out.println(listaVertices.size());
 		
 		return listaVertices;
