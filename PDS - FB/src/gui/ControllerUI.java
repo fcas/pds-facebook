@@ -21,8 +21,8 @@ import tests.VerticeJaExisteException;
 
 
 import model.IUsuario;
-import model.Ranking;
 import model.UsuarioApi;
+import model.rankings.RankingAmigos;
 
 /**
  * @author larissa

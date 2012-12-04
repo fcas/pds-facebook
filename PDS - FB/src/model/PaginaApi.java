@@ -4,6 +4,15 @@
  */
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import api.Cliente;
+
+import com.restfb.Connection;
+import com.restfb.Parameter;
+import com.restfb.types.Page;
+
 /**
  *
  * @author larissa
@@ -61,5 +70,30 @@ public class PaginaApi implements IPagina {
 	public String getID() {
 		return ID;
 	}
+	
+	@Override
+	public List<IPagina> buscarPaginasPalavraChave(String palavra) {
+        Connection<Page> conexao = Cliente.getInstance().fetchConnection("search",
+				Page.class, Parameter.with("q", palavra),
+				Parameter.with("type", "page"));
+        
+        List<Page> paginas = conexao.getData();
+        List<IPagina> listaPaginas = new ArrayList<IPagina>();
+   
+        for (int i=0; i<paginas.size(); i++) {
+            Page p = Cliente.getInstance().fetchObject(paginas.get(i).getId(),
+					Page.class);
+            
+            IPagina pagina = new PaginaApi();
+            pagina.setNome(p.getName());
+            pagina.setLink(p.getLink());
+            //pagina.setLikes(p.getLikes().toString());
+            pagina.setCategoria(p.getCategory());
+            listaPaginas.add(pagina);
+            
+        }
+        
+        return listaPaginas;
+    }
     
 }

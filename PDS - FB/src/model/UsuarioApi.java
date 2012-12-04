@@ -25,6 +25,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 
+import model.rankings.Amigos;
+import model.rankings.Categorias;
+import model.rankings.RankingCategorias;
+import model.rankings.RankingPaginas;
+import model.rankings.Paginas;
+import model.rankings.RankingAmigos;
+
 import tests.ParDeVerticesNaoExistenteException;
 import tests.VerticeJaExisteException;
 
@@ -33,9 +40,7 @@ import tests.VerticeJaExisteException;
  * @author larissa
  */
 public class UsuarioApi implements IUsuario {
-	//Utilizado no método recomendarPaginas(), para determinar quantos "likes" são necessários para que uma página seja considerada relevante
-	
-	
+
     private User user;
     
     private String aniversario;
@@ -54,7 +59,7 @@ public class UsuarioApi implements IUsuario {
     
     private List<IPagina> paginasCurtidas = buscarPaginasCurtidas();
     
-    private Ranking ranking = new Ranking();
+    private RankingAmigos ranking = new RankingAmigos();
     
     public UsuarioApi (String username) {
         user = Cliente.getInstance().fetchObject(username, User.class);
@@ -147,7 +152,7 @@ public class UsuarioApi implements IUsuario {
         return status;
     }
     
-    public Ranking getRanking() {
+    public RankingAmigos getRanking() {
     	ranking.ordenarRanking();
     	return ranking;
     }
@@ -175,7 +180,6 @@ public class UsuarioApi implements IUsuario {
 			}	
 		}	
 		
-		//System.out.println("ESCREVENDO NO ARQUIVO");
 		return amigos;
     }
     
@@ -223,31 +227,6 @@ public class UsuarioApi implements IUsuario {
 		return listaMeusGrupos;
 		
     }
-    
-    @Override
-    public List<IPagina> buscarPaginasPalavraChave(String palavra) {
-        Connection<Page> conexao = Cliente.getInstance().fetchConnection("search",
-				Page.class, Parameter.with("q", palavra),
-				Parameter.with("type", "page"));
-        
-        List<Page> paginas = conexao.getData();
-        List<IPagina> listaPaginas = new ArrayList<IPagina>();
-   
-        for (int i=0; i<paginas.size(); i++) {
-            Page p = Cliente.getInstance().fetchObject(paginas.get(i).getId(),
-					Page.class);
-            
-            IPagina pagina = new PaginaApi();
-            pagina.setNome(p.getName());
-            pagina.setLink(p.getLink());
-            //pagina.setLikes(p.getLikes().toString());
-            pagina.setCategoria(p.getCategory());
-            listaPaginas.add(pagina);
-            
-        }
-        
-        return listaPaginas;
-    }
 
 	@Override
 	public List<String> getAmigosIDs() {
@@ -286,9 +265,8 @@ public class UsuarioApi implements IUsuario {
 		return listaVertices;
 	}
 	
-	//retorna os Nomes dos amigos
 	@Override
-	public List<String> buscarAmigosMaiorAfinidade() throws FileNotFoundException, IOException, VerticeJaExisteException, ParDeVerticesNaoExistenteException {
+	public RankingAmigos buscarAmigosMaiorAfinidade() throws FileNotFoundException, IOException, VerticeJaExisteException, ParDeVerticesNaoExistenteException {
 		
 		/*CRITERIO = PAGINAS. COLOCAR EM ARQUIVO PARA MELHORAR DESEMPENHO*/
 		List<String> listaAmigosIDs = getAmigosIDs();
@@ -297,13 +275,13 @@ public class UsuarioApi implements IUsuario {
 			int quantPaginas = paginasEmComum(listaAmigosIDs.get(i).toString()).size();
 			if (quantPaginas >= 15) {//ESSE CRITÃ‰RIO PODE SER MUDADO
 					
-					AmigoRanking amigo = ranking.amigoJaExisteID(listaAmigosIDs.get(i).toString());
+					Amigos amigo = ranking.amigoJaExisteID(listaAmigosIDs.get(i).toString());
 					if (amigo != null) {
 						amigo.incrementaPontos(quantPaginas);
 					} else {
 						Vertex v = GerarGrafo.getInstance().searchVertex(listaAmigosIDs.get(i).toString());
 						if (v != null) {
-							amigo = new AmigoRanking();
+							amigo = new Amigos();
 							amigo.setID(v.getId());
 							amigo.setNome(v.getName());
 							amigo.setPontos(quantPaginas);
@@ -315,13 +293,13 @@ public class UsuarioApi implements IUsuario {
 			int quantGrupos = gruposEmComum(listaAmigosIDs.get(i).toString());
 			if (quantGrupos > 2) {//ESSE CRITÃ‰RIO PODE SER MUDADO
 				
-				AmigoRanking amigo = ranking.amigoJaExisteID(listaAmigosIDs.get(i).toString());
+				Amigos amigo = ranking.amigoJaExisteID(listaAmigosIDs.get(i).toString());
 				if (amigo != null) {
 					amigo.incrementaPontos(quantGrupos*3);
 				} else {
 					Vertex v = GerarGrafo.getInstance().searchVertex(listaAmigosIDs.get(i).toString());
 					if (v != null) {
-						amigo = new AmigoRanking();
+						amigo = new Amigos();
 						amigo.setID(v.getId());
 						amigo.setNome(v.getName());
 						amigo.setPontos(quantGrupos*3);
@@ -348,11 +326,11 @@ public class UsuarioApi implements IUsuario {
 		
 		
 		for (int i=0; i<post.getUsuariosComent().size(); i++) {
-			AmigoRanking amigo = ranking.amigoJaExisteNome(post.getUsuariosComent().get(i).toString());
+			Amigos amigo = ranking.amigoJaExisteNome(post.getUsuariosComent().get(i).toString());
 			if (amigo != null) {
 				amigo.setPontos(amigo.getPontos()+7);
 			} else {
-				amigo = new AmigoRanking();
+				amigo = new Amigos();
 				amigo.setID(GerarGrafo.getInstance().searchVertexNome(nome).getId());
 				amigo.setNome(post.getUsuariosComent().get(i).toString());
 				amigo.setPontos(7);
@@ -360,7 +338,7 @@ public class UsuarioApi implements IUsuario {
 			}
 		}
 		
-		return null;//AJEITAR ESSE RETURN
+		return ranking;
 		
 	}
 	
@@ -432,95 +410,144 @@ public class UsuarioApi implements IUsuario {
         return quantidade;
 	}
 	
-	//botar global
+	public RankingPaginas paginasAmigosRanking() throws IOException, VerticeJaExisteException, ParDeVerticesNaoExistenteException {
+		int cont = 0;
+    	BufferedReader ranking = new BufferedReader(new FileReader(caminhoArquivo+"ranking.txt")); //seta o caminho do arquivo de leitura "ranking.txt" que contï¿½m ranking dos amigos mais prï¿½ximos
+
+		RankingPaginas listaRanking = new RankingPaginas();
+		  while(cont < 5) //para os 5 primeiro amigos do ranking
+	        {
+	        	Vertex v = (Vertex) GerarGrafo.getInstance().searchVertexNome(ranking.readLine()); //v = prï¿½xima linha do arquivo "ranking.txt"
+	        	if (v != null) //se v conseguiu pegar um vï¿½rtice
+	        	{
+	        		System.out.println("v = " + v.getName());
+	        		/*
+	        		 * Cria uma lista completa de pï¿½ginas que os amigos do ranking curtem.
+	        		 * Em seguida, verifica quais dessas pï¿½ginas o usuï¿½rio jï¿½ curte.
+	        		 * Apï¿½s, verifica quais dessas pï¿½ginas sï¿½o pouco populares e as remove da lista.  
+	        		 */
+	        		List<IPagina> paginasAmigo = buscarPaginasAmigo(v.getId()); //lista auxiliar de pï¿½ginas. Pega as pï¿½ginas que "v" curte
+	        		for (int i=0; i<paginasCurtidas.size(); i++) //para cada pï¿½gina que o usuï¿½rio curte
+	        		{
+	        			if (paginasAmigo.contains(paginasCurtidas.get(i))) //se o usuï¿½rio jï¿½ curte a mesma pï¿½gina que o amigo
+	        				paginasAmigo.remove(paginasCurtidas.get(i)); //essa pï¿½gina nï¿½o serï¿½ sugerida.
+	        		}
+	        		
+	        		for (int i=0; i<paginasAmigo.size(); i++) //para cada pï¿½gina restante na lista de amigos
+	        		{
+	        			
+	        			if (paginasAmigo.get(i).getLikes() >= 3000) //se essa pï¿½gina tem "LIMITE_CURTIDAS" curtidas,
+	        			{
+	        				listaRanking.adicionaPagina(paginasAmigo.get(i));
+	        			}
+	        		}
+	        	}
+	        	
+	        	ranking.readLine(); //pula uma linha do arquivo ranking.txt
+	        	cont++; //conta um amigo do ranking
+	        }
+		  ranking.close(); //resource leak
+		  return listaRanking;
+	}
+	
+	@Override
 	public List<IPagina> recomendarPaginas() throws IOException, VerticeJaExisteException, ParDeVerticesNaoExistenteException {
-		System.out.println("Criando lista de Recomendações.");
-    	BufferedReader ranking = new BufferedReader(new FileReader(caminhoArquivo+"ranking.txt")); //seta o caminho do arquivo de leitura "ranking.txt" que contém ranking dos amigos mais próximos
-    	int cont = 0; //auxiliar
-    	List<IPagina> paginasRecomendadas = new ArrayList<IPagina>(); //lista de páginas recomendadas para o usuário
-    	ListaPaginaRanking listaRanking = new ListaPaginaRanking();
-    	
-        while(cont < 5) //para os 5 primeiro amigos do ranking
-        {
-        	Vertex v = (Vertex) GerarGrafo.getInstance().searchVertexNome(ranking.readLine()); //v = próxima linha do arquivo "ranking.txt"
-        	if (v != null) //se v conseguiu pegar um vértice
-        	{
-        		System.out.println("v = " + v.getName());
-        		/*
-        		 * Cria uma lista completa de páginas que os amigos do ranking curtem.
-        		 * Em seguida, verifica quais dessas páginas o usuário já curte.
-        		 * Após, verifica quais dessas páginas são pouco populares e as remove da lista.  
-        		 */
-        		List<IPagina> paginasAmigo = buscarPaginasAmigo(v.getId()); //lista auxiliar de páginas. Pega as páginas que "v" curte
-        		for (int i=0; i<paginasCurtidas.size(); i++) //para cada página que o usuário curte
-        		{
-        			if (paginasAmigo.contains(paginasCurtidas.get(i))) //se o usuário já curte a mesma página que o amigo
-        				paginasAmigo.remove(paginasCurtidas.get(i)); //essa página não será sugerida.
-        		}
-        		
-        		for (int i=0; i<paginasAmigo.size(); i++) //para cada página restante na lista de amigos
-        		{
-        			
-        			if (paginasAmigo.get(i).getLikes() >= 3000) //se essa página tem "LIMITE_CURTIDAS" curtidas,
-        			{
-        				listaRanking.adicionaPagina(paginasAmigo.get(i));
-        			}
-        		}
-        	}
-        	
-        	ranking.readLine(); //pula uma linha do arquivo ranking.txt
-        	cont++; //conta um amigo do ranking
-        }
-        
-        System.out.println("Lista de recomendações criada.");
+    	List<IPagina> paginasRecomendadas = new ArrayList<IPagina>(); //lista de pï¿½ginas recomendadas para o usuï¿½rio
+    	RankingPaginas listaRanking = paginasAmigosRanking();
         
         /*
          * Ordenar por categoria 
          */
         
-        List<String> categoriasMaisCurtidas = this.categoriasMaisCurtidas(); //verifica categorias que o usuário mais se interessa
+        List<String> categoriasMaisCurtidas = this.categoriasMaisCurtidas(); //verifica categorias que o usuï¿½rio mais se interessa
         
-        System.out.println("Categorias mais curtidas pelo usuário: ");
-        for (int i = 0; i<categoriasMaisCurtidas.size(); i++){
-        	System.out.println(categoriasMaisCurtidas.get(i));
-        }
+        listaRanking.aplicarCategoriasMaisCurtidas(categoriasMaisCurtidas); //aplica o ï¿½ndice de categorias 
+        listaRanking.ordenarRanking(); //ordena baseado nos novos ï¿½ndices
         
-        listaRanking.aplicarCategoriasMaisCurtidas(categoriasMaisCurtidas); //aplica o índice de categorias 
-        listaRanking.ordenarRanking(); //ordena baseado nos novos índices
-        
-        
-        
-        //adicionar páginas ordenadas à lista de páginas recomendadas
-        List<PaginaRanking> aux = listaRanking.getListaPagina();
-		System.out.println("Lista de páginas de Sugestão: ");
-        for (int i = 0; i < aux.size(); i++){
+        //adicionar pï¿½ginas ordenadas ï¿½ lista de pï¿½ginas recomendadas
+        List<Paginas> aux = listaRanking.getListaPagina();
+		for (int i = 0; i < aux.size(); i++){
         	paginasRecomendadas.add(aux.get(i).getPagina());
-        	System.out.println(aux.get(i).getPagina().getNome() + " - " + aux.get(i).getPopularidade());
         }
-        System.out.println("Total: " + paginasRecomendadas.size());
         
-        
-        
-        
-        ranking.close(); //resource leak
+       
 		return paginasRecomendadas;
 		
 	}
-
+	
 	public List<String> categoriasMaisCurtidas() {
-		System.out.println("Calculando categorias preferidas...");
-		ListaCategoriaRanking listaRanking = new ListaCategoriaRanking();
+		RankingCategorias listaRanking = new RankingCategorias();
 		for (int i = 0; i < paginasCurtidas.size(); i++){
 			listaRanking.adicionaCategoria(paginasCurtidas.get(i).getCategoria());
 		}
 		listaRanking.ordenarRanking();
 		
 		List<String> listaTresPrimeiros = new ArrayList<String>();
-		List<CategoriaRanking> rankingFinal = listaRanking.getListaCategoria();
+		List<Categorias> rankingFinal = listaRanking.getListaCategoria();
 		for (int i = 0; i < 3; i++){
 			listaTresPrimeiros.add(rankingFinal.get(i).getCategoria());
 		}
 		
 		return listaTresPrimeiros;
+	}
+	
+	public int verificaRepeticoes(Vertex nome, Vertex amigo) {
+
+		int cont = 0;
+
+		for (int i = 0; i < nome.getVizinhos().size(); i++) {
+			for (int j = 0; j < nome.getVizinhos().get(i).getVizinhos().size(); j++) {
+				String aux = nome.getVizinhos().get(i).getVizinhos().get(j)
+						.getName();
+				if (!(aux.equals(nome.getName()))
+						&& aux.equals(amigo.getName()))
+					cont++;
+			}
+		}
+
+		return cont;
+
+	}
+	
+	@Override
+	public List<Vertex> sugerirAmigos(String nome) throws FileNotFoundException, IOException, VerticeJaExisteException, ParDeVerticesNaoExistenteException {
+
+		List<Vertex> listaPotenciaisAmigos = new ArrayList<Vertex>();
+		Vertex vertex = null;
+		Vertex amigo;
+
+		// busca o vertice contendo nome
+		for (int i = 0; i < GerarGrafo.getInstance().getListVertex().size(); i++) {
+			if (nome.equals(GerarGrafo.getInstance().getListVertex().get(i).getName())) {
+				vertex = GerarGrafo.getInstance().getListVertex().get(i);
+			}
+		}
+
+		// varre os amigos de nome
+		for (int j = 0; j < vertex.getVizinhos().size(); j++) {
+			// varre os amigos dos amigos de nome
+			for (int k = 0; k < vertex.getVizinhos().get(j).getVizinhos()
+					.size(); k++) {
+				amigo = vertex.getVizinhos().get(j).getVizinhos().get(k);
+				if (verificaRepeticoes(vertex, amigo) > 2) {
+					if (!listaPotenciaisAmigos.contains(amigo)) {
+						System.out.println("adicionando " + amigo.getName());
+						listaPotenciaisAmigos.add(amigo);
+					}
+
+				}
+			}
+		}
+
+		for (int j = 0; j < vertex.getVizinhos().size(); j++) {
+			if (listaPotenciaisAmigos.contains(vertex.getVizinhos().get(j))) {
+				System.out.println("removendo "
+						+ vertex.getVizinhos().get(j).getName());
+				listaPotenciaisAmigos.remove(vertex.getVizinhos().get(j));
+			}
+		}
+
+		return listaPotenciaisAmigos;
+
 	}
 }

@@ -4,7 +4,7 @@ import java.io.IOException;
 
 
 import model.IUsuario;
-import model.Ranking;
+import model.rankings.RankingAmigos;
 
 public class DaoArquivo extends DaoFactory{
 	private static DaoArquivo instance = null;

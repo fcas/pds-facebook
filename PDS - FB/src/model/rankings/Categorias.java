@@ -1,11 +1,11 @@
-package model;
+package model.rankings;
 
-public class CategoriaRanking {
+public class Categorias {
 
 	private String categoria;
 	private int contador;
 	
-	public CategoriaRanking(String categoria) {
+	public Categorias(String categoria) {
 		this.categoria = categoria;
 		this.contador = 0;
 	}

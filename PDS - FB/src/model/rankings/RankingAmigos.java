@@ -1,19 +1,19 @@
-package model;
+package model.rankings;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class Ranking {
+public class RankingAmigos {
 	
-	private List<AmigoRanking> lista = new ArrayList<AmigoRanking>();
+	private List<Amigos> lista = new ArrayList<Amigos>();
 
-	public List<AmigoRanking> getLista() {
+	public List<Amigos> getLista() {
 		return lista;
 	}
 	
-	public AmigoRanking amigoJaExisteID (String ID) {
+	public Amigos amigoJaExisteID (String ID) {
 		for (int i=0; i<lista.size(); i++) {
 			if (lista.get(i).getID().equals(ID))
 				return lista.get(i);
@@ -22,7 +22,7 @@ public class Ranking {
 		return null;
 	}
 	
-	public AmigoRanking amigoJaExisteNome (String nome) {
+	public Amigos amigoJaExisteNome (String nome) {
 		for (int i=0; i<lista.size(); i++) {
 			if (lista.get(i).getNome().equals(nome))
 				return lista.get(i);
@@ -32,9 +32,9 @@ public class Ranking {
 	}
 	
 	public void ordenarRanking() {
-	        Collections.sort(lista, new Comparator<AmigoRanking>() {  
+	        Collections.sort(lista, new Comparator<Amigos>() {  
 	            @Override  
-	            public int compare(AmigoRanking o1, AmigoRanking o2) {  
+	            public int compare(Amigos o1, Amigos o2) {  
 	                return o1.getPontos().compareTo(o2.getPontos());  
 	            }  
 	           

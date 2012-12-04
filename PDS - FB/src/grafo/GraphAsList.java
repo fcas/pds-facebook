@@ -26,7 +26,7 @@ public class GraphAsList extends AbstractGraph {
 		}
 		return retorno;
 	}
-	
+	 
 	@Override
 	public Vertex searchVertexNome (String nome) {
 		Vertex retorno = null;
@@ -120,65 +120,6 @@ public class GraphAsList extends AbstractGraph {
 		} else {
 			throw new VerticeJaExisteException();
 		}
-	}
-
-	public int verificaRepeticoes(Vertex nome, Vertex amigo) {
-
-		int cont = 0;
-
-		for (int i = 0; i < nome.getVizinhos().size(); i++) {
-			for (int j = 0; j < nome.getVizinhos().get(i).getVizinhos().size(); j++) {
-				String aux = nome.getVizinhos().get(i).getVizinhos().get(j)
-						.getName();
-				if (!(aux.equals(nome.getName()))
-						&& aux.equals(amigo.getName()))
-					cont++;
-			}
-		}
-
-		return cont;
-
-	}
-
-	public List<Vertex> sugerirAmigos(String nome) {
-
-		List<Vertex> listaPotenciaisAmigos = new ArrayList<Vertex>();
-		Vertex vertex = null;
-		Vertex amigo;
-
-		// busca o vertice contendo nome
-		for (int i = 0; i < super.listVertex.size(); i++) {
-			if (nome.equals(super.listVertex.get(i).getName())) {
-				vertex = super.listVertex.get(i);
-			}
-		}
-
-		// varre os amigos de nome
-		for (int j = 0; j < vertex.getVizinhos().size(); j++) {
-			// varre os amigos dos amigos de nome
-			for (int k = 0; k < vertex.getVizinhos().get(j).getVizinhos()
-					.size(); k++) {
-				amigo = vertex.getVizinhos().get(j).getVizinhos().get(k);
-				if (verificaRepeticoes(vertex, amigo) > 2) {
-					if (!listaPotenciaisAmigos.contains(amigo)) {
-						System.out.println("adicionando " + amigo.getName());
-						listaPotenciaisAmigos.add(amigo);
-					}
-
-				}
-			}
-		}
-
-		for (int j = 0; j < vertex.getVizinhos().size(); j++) {
-			if (listaPotenciaisAmigos.contains(vertex.getVizinhos().get(j))) {
-				System.out.println("removendo "
-						+ vertex.getVizinhos().get(j).getName());
-				listaPotenciaisAmigos.remove(vertex.getVizinhos().get(j));
-			}
-		}
-
-		return listaPotenciaisAmigos;
-
 	}
 
 }
