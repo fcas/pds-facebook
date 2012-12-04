@@ -1,35 +1,49 @@
-Tiago Dantas
-57
 Rebeca Maia
-52
+87
+Tiago Dantas
+71
+Sérgio Motta
+64
 Duarte Fernandes
 42
 Valmiro Zuno
-39
+42
+Gabriel Santos
+35
+Gisele Souto
+34
 Carol Correia
 33
+Viviane Costa
+32
+Bárbara Maia
+27
+Raquel C. N. S. Dos Anjos
+25
+Everton Cavalcante
+24
 Hand Medeiros
 24
+Iago Moreira
+23
 Jazmin Alvarez Sanz
 22
-Gisele Souto
-20
+Cristina Leite
+21
+Maurício Nunes
+21
 Aninha Mafra
 20
-Bárbara Maia
-20
-Viviane Costa
-18
-Raquel C. N. S. Dos Anjos
-18
+Lucas Mauricio
+19
+Felipe Cordeiro
+19
 Giovanna Vilaza
 18
 Ariane Faria
 18
 Milagros Alvarez Sanz
 18
-Everton Cavalcante
-17
 Maria Fernanda Lyra
 17
 Natália Coutinho
@@ -40,29 +54,27 @@ Thayná Rosado
 16
 Lucas Azevedo
 16
-Sérgio Motta
-15
 Caroline Deharbe
-15
-Fabiana Cheade
 15
 Abi Dalby
 15
+Bruno Beltrao
+14
+Samuel Barrocas
+14
+Phellipe Albert Volkmer
+14
+AnderShow Rodrigues
+14
 Isaac Avelino Oliveira
-12
-Lucas Mauricio
 12
 Danilo Faria
 12
 Priscila Costa
 12
-Felipe Cordeiro
-12
 Marina Medeiros
 12
 Thiago Menezes
-9
-Felipe Dantas
 9
 Maria Clara Dias
 9
@@ -100,8 +112,6 @@ Eduardo Lacerda Cattaneo
 9
 Ana Júlia Bicalho
 9
-Iago Moreira
-9
 Marcos Renan
 9
 Amanda Teles
@@ -113,6 +123,8 @@ Thiago Lima
 Dalton Limeira
 9
 Thiago Lacerda Maia
+9
+César Garcia
 9
 Gabriel Valença
 9

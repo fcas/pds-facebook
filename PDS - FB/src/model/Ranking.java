@@ -6,9 +6,6 @@ import java.util.Comparator;
 import java.util.List;
 
 public class Ranking {
-	/*NO VERTICE DO GRAFO, DETERMINAR A QUANTIDADE DE PONTOS QUE ELE TEM, PRA PODER FAZER O RANKING.
-	 * CADA COISA EM COMUM: PAGINA, GRUPO E ALGUM COMENTARIO EM POSTS. CADA UM VALE 1 PONTO
-	 */
 	
 	private List<AmigoRanking> lista = new ArrayList<AmigoRanking>();
 
@@ -16,9 +13,18 @@ public class Ranking {
 		return lista;
 	}
 	
-	public AmigoRanking amigoJaExiste (String ID) {
+	public AmigoRanking amigoJaExisteID (String ID) {
 		for (int i=0; i<lista.size(); i++) {
 			if (lista.get(i).getID().equals(ID))
+				return lista.get(i);
+		}
+		
+		return null;
+	}
+	
+	public AmigoRanking amigoJaExisteNome (String nome) {
+		for (int i=0; i<lista.size(); i++) {
+			if (lista.get(i).getNome().equals(nome))
 				return lista.get(i);
 		}
 		

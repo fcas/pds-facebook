@@ -277,25 +277,57 @@ public class InfoUsuario extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void menu_amigosnomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_amigosnomeActionPerformed
-        Principal.AmigosNome();
+        ControllerUI.AmigosNome();
     }//GEN-LAST:event_menu_amigosnomeActionPerformed
 
     private void menu_amigosinterajoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_amigosinterajoActionPerformed
-        Principal.AmigosInterajo();
+        ControllerUI.AmigosInterajo();
     }//GEN-LAST:event_menu_amigosinterajoActionPerformed
 
     private void menu_paginaspalavraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_paginaspalavraActionPerformed
-        Principal.PaginaPalavraChave();
+        ControllerUI.PaginaPalavraChave();
     }//GEN-LAST:event_menu_paginaspalavraActionPerformed
 
     private void menu_paginasrecomendadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_paginasrecomendadasActionPerformed
-        Principal.PaginasRecomendadas();
+        ControllerUI.PaginasRecomendadas();
     }//GEN-LAST:event_menu_paginasrecomendadasActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel aniversario;
-    private javax.swing.JLabel cidade;
-    private javax.swing.JButton jButton1;
+    public javax.swing.JLabel getAniversario() {
+		return aniversario;
+	}
+
+	public void setAniversario(String aniversario) {
+		this.aniversario.setText(aniversario);
+	}
+
+	public javax.swing.JLabel getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome.setText(nome);
+	}
+
+	public javax.swing.JLabel getSobre() {
+		return sobre;
+	}
+
+	public void setSobre(String sobre) {
+		this.sobre.setText(sobre);
+	}
+
+	private javax.swing.JLabel cidade;
+    public javax.swing.JLabel getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(String cidade) {
+		this.cidade.setText(cidade);
+	}
+
+	private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

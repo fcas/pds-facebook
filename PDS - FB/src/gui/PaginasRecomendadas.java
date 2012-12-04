@@ -269,19 +269,19 @@ public class PaginasRecomendadas extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void menu_amigosnomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_amigosnomeActionPerformed
-        Principal.AmigosNome();
+        ControllerUI.AmigosNome();
     }//GEN-LAST:event_menu_amigosnomeActionPerformed
 
     private void menu_amigosinterajoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_amigosinterajoActionPerformed
-        Principal.AmigosInterajo();
+        ControllerUI.AmigosInterajo();
     }//GEN-LAST:event_menu_amigosinterajoActionPerformed
 
     private void menu_paginaspalavraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_paginaspalavraActionPerformed
-        Principal.PaginaPalavraChave();
+        ControllerUI.PaginaPalavraChave();
     }//GEN-LAST:event_menu_paginaspalavraActionPerformed
 
     private void menu_paginasrecomendadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_paginasrecomendadasActionPerformed
-        Principal.PaginasRecomendadas();
+        ControllerUI.PaginasRecomendadas();
     }//GEN-LAST:event_menu_paginasrecomendadasActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
