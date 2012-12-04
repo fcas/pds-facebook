@@ -11,15 +11,16 @@ package model;
 public class PaginaApi implements IPagina {
     
     private String nome;
+    private String ID;
     private String categoria;
-    private String likes;
+    private long likes;
     private String link;
 
     public void setCategoria(String categoria) {
         this.categoria = categoria;
     }
 
-    public void setLikes(String likes) {
+    public void setLikes(long likes) {
         this.likes = likes;
     }
 
@@ -42,7 +43,7 @@ public class PaginaApi implements IPagina {
     }
 
     @Override
-    public String getLikes() {
+    public long getLikes() {
         return likes;
     }
 
@@ -50,5 +51,15 @@ public class PaginaApi implements IPagina {
     public String getLink() {
         return link;
     }
+
+	@Override
+	public void setID(String ID) {
+		this.ID = ID;
+	}
+
+	@Override
+	public String getID() {
+		return ID;
+	}
     
 }

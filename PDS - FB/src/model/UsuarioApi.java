@@ -22,11 +22,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Set;
+import java.util.ListIterator;
 
 import tests.ParDeVerticesNaoExistenteException;
 import tests.VerticeJaExisteException;
@@ -36,7 +33,9 @@ import tests.VerticeJaExisteException;
  * @author larissa
  */
 public class UsuarioApi implements IUsuario {
-    
+	//Utilizado no método recomendarPaginas(), para determinar quantos "likes" são necessários para que uma página seja considerada relevante
+	
+	
     private User user;
     
     private String aniversario;
@@ -51,7 +50,7 @@ public class UsuarioApi implements IUsuario {
     
     private List<IGrupo> listaMeusGrupos = meusGrupos();
     
-    private final String caminhoArquivo = "/home/larissa/workspace2/";
+    private final String caminhoArquivo = System.getProperty("user.dir") + System.getProperty("file.separator");
     
     private List<IPagina> paginasCurtidas = buscarPaginasCurtidas();
     
@@ -185,17 +184,19 @@ public class UsuarioApi implements IUsuario {
         Connection<Page> conexao = Cliente.getInstance().fetchConnection("me/likes", Page.class);
         List<Page> minhasPaginas = conexao.getData();
         
-        List<IPagina> listaPaginas = new ArrayList();;
+        List<IPagina> listaPaginas = new ArrayList<IPagina>();
         
         for (int i=0; i<minhasPaginas.size(); i++) {
-//            Page p = Cliente.getInstance().fetchObject(minhasPaginas.get(i).getId(),
-//					Page.class);
-            
+        	System.out.println("fetching page " + minhasPaginas.get(i).getId());
+            Page p = Cliente.getInstance().fetchObject(minhasPaginas.get(i).getId(),
+					Page.class);
+
             IPagina pagina = new PaginaApi();
-            pagina.setNome(minhasPaginas.get(i).getName());
-            pagina.setLink(minhasPaginas.get(i).getLink());
-            //pagina.setLikes(minhasPaginas.get(i).getLikes().toString());
-            pagina.setCategoria(minhasPaginas.get(i).getCategory());
+            pagina.setNome(p.getName());
+            pagina.setLink(p.getLink());
+            pagina.setLikes(p.getLikes());
+            pagina.setCategoria(p.getCategory());
+            pagina.setID(p.getId());
             listaPaginas.add(pagina);
             
         }
@@ -208,7 +209,7 @@ public class UsuarioApi implements IUsuario {
 		Connection<Group> cgroup = Cliente.getInstance().fetchConnection("me/groups", Group.class);
 		List<Group> lista = cgroup.getData();
 		
-		List<IGrupo> listaMeusGrupos = new ArrayList();
+		List<IGrupo> listaMeusGrupos = new ArrayList<IGrupo>();
 		
 		for (int i=0; i<lista.size(); i++) {
 			IGrupo grupo = new GrupoApi();
@@ -257,7 +258,6 @@ public class UsuarioApi implements IUsuario {
 		List<String> amigosIDs = new ArrayList<String>();
 		
 		for (int i = 0; i < amigosData.size(); i++) {
-			//System.out.println(amigosData.get(i).getId());
 			amigosIDs.add(amigosData.get(i).getId());
 		}
 		
@@ -282,7 +282,6 @@ public class UsuarioApi implements IUsuario {
 	public List<Vertex> buscarAmigos(String nome) throws FileNotFoundException, IOException, VerticeJaExisteException, ParDeVerticesNaoExistenteException {
 		
 		List<Vertex> listaVertices = GerarGrafo.getInstance().buscarVerticeNome(nome);
-		//System.out.println(listaVertices.size());
 		
 		return listaVertices;
 	}
@@ -295,7 +294,6 @@ public class UsuarioApi implements IUsuario {
 		List<String> listaAmigosIDs = getAmigosIDs();
 		
 		for (int i=0; i<listaAmigosIDs.size(); i++) {
-			//System.out.println("BUSCANDO PARA AMIGO " + listaAmigosIDs.get(i).toString());
 			int quantPaginas = paginasEmComum(listaAmigosIDs.get(i).toString()).size();
 			if (quantPaginas >= 15) {//ESSE CRITÃ‰RIO PODE SER MUDADO
 					
@@ -370,17 +368,19 @@ public class UsuarioApi implements IUsuario {
 		Connection<Page> conexao = Cliente.getInstance().fetchConnection(ID+"/likes", Page.class);
         List<Page> paginasAmigo = conexao.getData();
         
-        //System.out.println("AMIGO " + ID + " CURTE " + paginasAmigo.size() + " PAGINAS");
-        List<IPagina> listaPaginas = new ArrayList();
+        List<IPagina> listaPaginas = new ArrayList<IPagina>();
         
         for (int i=0; i<paginasAmigo.size(); i++) {
-            //Page p = Cliente.getInstance().fetchObject(paginasAmigo.get(i).getId(),
-					//Page.class);
+        	System.out.println("Fetching info from page: " + paginasAmigo.get(i).getName());
+            Page p = Cliente.getInstance().fetchObject(paginasAmigo.get(i).getId(),
+					Page.class);
             
             IPagina pagina = new PaginaApi();
-            pagina.setNome(paginasAmigo.get(i).getName());
-            pagina.setLink(paginasAmigo.get(i).getLink());
-            pagina.setCategoria(paginasAmigo.get(i).getCategory());
+            pagina.setNome(p.getName());
+            pagina.setLink(p.getLink());
+            pagina.setLikes(p.getLikes());
+            pagina.setCategoria(p.getCategory());
+            pagina.setID(p.getId());
             listaPaginas.add(pagina);
             
         }
@@ -392,7 +392,7 @@ public class UsuarioApi implements IUsuario {
 		
         List<IPagina> listaPaginas = buscarPaginasAmigo(ID);
         
-        List<IPagina> paginasComuns = new ArrayList();
+        List<IPagina> paginasComuns = new ArrayList<IPagina>();
         
 	        for (int i=0; i<paginasCurtidas.size(); i++) {
 	        	for (int j=0; j<listaPaginas.size(); j++) {
@@ -401,7 +401,6 @@ public class UsuarioApi implements IUsuario {
 	        	}
 	        }
 
-        //System.out.println("TAMANHO DA LISTA DE PAGINAS EM COMUM = " + paginasComuns.size());
         return paginasComuns;
 		
 	}
@@ -412,7 +411,7 @@ public class UsuarioApi implements IUsuario {
 		Connection<Group> cgroup = Cliente.getInstance().fetchConnection(ID+"/groups", Group.class);
 		List<Group> lista = cgroup.getData();
 		
-		List<IGrupo> gruposAmigo = new ArrayList();
+		List<IGrupo> gruposAmigo = new ArrayList<IGrupo>();
 		
 		for (int i=0; i<lista.size(); i++) {
 			IGrupo grupo = new GrupoApi();
@@ -435,30 +434,93 @@ public class UsuarioApi implements IUsuario {
 	
 	//botar global
 	public List<IPagina> recomendarPaginas() throws IOException, VerticeJaExisteException, ParDeVerticesNaoExistenteException {
-    	BufferedReader ranking = new BufferedReader(new FileReader(caminhoArquivo+"ranking.txt"));
-    	int cont = 0;
-    	List<IPagina> paginasRecomendadas = new ArrayList<IPagina>();
+		System.out.println("Criando lista de Recomendações.");
+    	BufferedReader ranking = new BufferedReader(new FileReader(caminhoArquivo+"ranking.txt")); //seta o caminho do arquivo de leitura "ranking.txt" que contém ranking dos amigos mais próximos
+    	int cont = 0; //auxiliar
+    	List<IPagina> paginasRecomendadas = new ArrayList<IPagina>(); //lista de páginas recomendadas para o usuário
+    	ListaPaginaRanking listaRanking = new ListaPaginaRanking();
     	
-        while(cont < 10) {
-        	Vertex v = (Vertex) GerarGrafo.getInstance().searchVertexNome(ranking.readLine()); 
-        	if (v.getId() != null) {
-        		List<IPagina> paginasAmigo = buscarPaginasAmigo(v.getId());
-        		for (int i=0; i<paginasCurtidas.size(); i++) {
-        			if (paginasAmigo.contains(paginasCurtidas.get(i)))
-        				paginasAmigo.remove(paginasCurtidas.get(i));
+        while(cont < 5) //para os 5 primeiro amigos do ranking
+        {
+        	Vertex v = (Vertex) GerarGrafo.getInstance().searchVertexNome(ranking.readLine()); //v = próxima linha do arquivo "ranking.txt"
+        	if (v != null) //se v conseguiu pegar um vértice
+        	{
+        		System.out.println("v = " + v.getName());
+        		/*
+        		 * Cria uma lista completa de páginas que os amigos do ranking curtem.
+        		 * Em seguida, verifica quais dessas páginas o usuário já curte.
+        		 * Após, verifica quais dessas páginas são pouco populares e as remove da lista.  
+        		 */
+        		List<IPagina> paginasAmigo = buscarPaginasAmigo(v.getId()); //lista auxiliar de páginas. Pega as páginas que "v" curte
+        		for (int i=0; i<paginasCurtidas.size(); i++) //para cada página que o usuário curte
+        		{
+        			if (paginasAmigo.contains(paginasCurtidas.get(i))) //se o usuário já curte a mesma página que o amigo
+        				paginasAmigo.remove(paginasCurtidas.get(i)); //essa página não será sugerida.
         		}
         		
-        		for (int i=0; i<paginasAmigo.size(); i++) {
-        			paginasRecomendadas.add(paginasAmigo.get(i));
+        		for (int i=0; i<paginasAmigo.size(); i++) //para cada página restante na lista de amigos
+        		{
+        			
+        			if (paginasAmigo.get(i).getLikes() >= 3000) //se essa página tem "LIMITE_CURTIDAS" curtidas,
+        			{
+        				listaRanking.adicionaPagina(paginasAmigo.get(i));
+        			}
         		}
         	}
         	
-        	ranking.readLine();
-        	cont++;
+        	ranking.readLine(); //pula uma linha do arquivo ranking.txt
+        	cont++; //conta um amigo do ranking
         }
         
+        System.out.println("Lista de recomendações criada.");
+        
+        /*
+         * Ordenar por categoria 
+         */
+        
+        List<String> categoriasMaisCurtidas = this.categoriasMaisCurtidas(); //verifica categorias que o usuário mais se interessa
+        
+        System.out.println("Categorias mais curtidas pelo usuário: ");
+        for (int i = 0; i<categoriasMaisCurtidas.size(); i++){
+        	System.out.println(categoriasMaisCurtidas.get(i));
+        }
+        
+        listaRanking.aplicarCategoriasMaisCurtidas(categoriasMaisCurtidas); //aplica o índice de categorias 
+        listaRanking.ordenarRanking(); //ordena baseado nos novos índices
+        
+        
+        
+        //adicionar páginas ordenadas à lista de páginas recomendadas
+        List<PaginaRanking> aux = listaRanking.getListaPagina();
+		System.out.println("Lista de páginas de Sugestão: ");
+        for (int i = 0; i < aux.size(); i++){
+        	paginasRecomendadas.add(aux.get(i).getPagina());
+        	System.out.println(aux.get(i).getPagina().getNome() + " - " + aux.get(i).getPopularidade());
+        }
+        System.out.println("Total: " + paginasRecomendadas.size());
+        
+        
+        
+        
+        ranking.close(); //resource leak
 		return paginasRecomendadas;
 		
 	}
 
+	public List<String> categoriasMaisCurtidas() {
+		System.out.println("Calculando categorias preferidas...");
+		ListaCategoriaRanking listaRanking = new ListaCategoriaRanking();
+		for (int i = 0; i < paginasCurtidas.size(); i++){
+			listaRanking.adicionaCategoria(paginasCurtidas.get(i).getCategoria());
+		}
+		listaRanking.ordenarRanking();
+		
+		List<String> listaTresPrimeiros = new ArrayList<String>();
+		List<CategoriaRanking> rankingFinal = listaRanking.getListaCategoria();
+		for (int i = 0; i < 3; i++){
+			listaTresPrimeiros.add(rankingFinal.get(i).getCategoria());
+		}
+		
+		return listaTresPrimeiros;
+	}
 }
