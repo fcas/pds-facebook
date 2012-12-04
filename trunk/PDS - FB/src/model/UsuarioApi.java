@@ -188,7 +188,6 @@ public class UsuarioApi implements IUsuario {
         List<IPagina> listaPaginas = new ArrayList<IPagina>();
         
         for (int i=0; i<minhasPaginas.size(); i++) {
-        	System.out.println("fetching page " + minhasPaginas.get(i).getId());
             Page p = Cliente.getInstance().fetchObject(minhasPaginas.get(i).getId(),
 					Page.class);
 
@@ -346,7 +345,6 @@ public class UsuarioApi implements IUsuario {
         List<IPagina> listaPaginas = new ArrayList<IPagina>();
         
         for (int i=0; i<paginasAmigo.size(); i++) {
-        	System.out.println("Fetching info from page: " + paginasAmigo.get(i).getName());
             Page p = Cliente.getInstance().fetchObject(paginasAmigo.get(i).getId(),
 					Page.class);
             
@@ -417,7 +415,6 @@ public class UsuarioApi implements IUsuario {
 	        	Vertex v = (Vertex) GerarGrafo.getInstance().searchVertexNome(ranking.readLine()); //v = pr�xima linha do arquivo "ranking.txt"
 	        	if (v != null) //se v conseguiu pegar um v�rtice
 	        	{
-	        		System.out.println("v = " + v.getName());
 	        		/*
 	        		 * Cria uma lista completa de paginas que os amigos do ranking curtem.
 	        		 * Em seguida, verifica quais dessas paginas o usuario ja curte.
@@ -521,6 +518,7 @@ public class UsuarioApi implements IUsuario {
 		}
 
 		// varre os amigos de nome
+		System.out.println("Calculando amigos... ");
 		for (int j = 0; j < vertex.getVizinhos().size(); j++) {
 			// varre os amigos dos amigos de nome
 			for (int k = 0; k < vertex.getVizinhos().get(j).getVizinhos()
@@ -528,7 +526,6 @@ public class UsuarioApi implements IUsuario {
 				amigo = vertex.getVizinhos().get(j).getVizinhos().get(k);
 				if (verificaRepeticoes(vertex, amigo) > 2) {
 					if (!listaPotenciaisAmigos.contains(amigo)) {
-						System.out.println("adicionando " + amigo.getName());
 						listaPotenciaisAmigos.add(amigo);
 					}
 
@@ -538,8 +535,6 @@ public class UsuarioApi implements IUsuario {
 
 		for (int j = 0; j < vertex.getVizinhos().size(); j++) {
 			if (listaPotenciaisAmigos.contains(vertex.getVizinhos().get(j))) {
-				System.out.println("removendo "
-						+ vertex.getVizinhos().get(j).getName());
 				listaPotenciaisAmigos.remove(vertex.getVizinhos().get(j));
 			}
 		}
