@@ -11,6 +11,7 @@ import com.restfb.FacebookClient;
 import com.restfb.Parameter;
 import com.restfb.types.Group;
 import com.restfb.types.Page;
+import com.restfb.types.Post;
 import com.restfb.types.User;
 
 import grafo.GerarGrafo;
@@ -56,7 +57,6 @@ public class UsuarioApi implements IUsuario {
     
     private Ranking ranking = new Ranking();
     
-    //ver se vai passar o nome mesmo.
     public UsuarioApi (String username) {
         user = Cliente.getInstance().fetchObject(username, User.class);
         
@@ -64,6 +64,7 @@ public class UsuarioApi implements IUsuario {
         this.setID(user.getId());
         this.setCidade(user.getLocale());
         this.setUsername(user.getUsername());
+        this.setAniversario(user.getBirthday());
         
     }       
 
@@ -298,7 +299,7 @@ public class UsuarioApi implements IUsuario {
 			int quantPaginas = paginasEmComum(listaAmigosIDs.get(i).toString()).size();
 			if (quantPaginas >= 15) {//ESSE CRITÉRIO PODE SER MUDADO
 					
-					AmigoRanking amigo = ranking.amigoJaExiste(listaAmigosIDs.get(i).toString());
+					AmigoRanking amigo = ranking.amigoJaExisteID(listaAmigosIDs.get(i).toString());
 					if (amigo != null) {
 						amigo.incrementaPontos(quantPaginas);
 					} else {
@@ -316,7 +317,7 @@ public class UsuarioApi implements IUsuario {
 			int quantGrupos = gruposEmComum(listaAmigosIDs.get(i).toString());
 			if (quantGrupos > 2) {//ESSE CRITÉRIO PODE SER MUDADO
 				
-				AmigoRanking amigo = ranking.amigoJaExiste(listaAmigosIDs.get(i).toString());
+				AmigoRanking amigo = ranking.amigoJaExisteID(listaAmigosIDs.get(i).toString());
 				if (amigo != null) {
 					amigo.incrementaPontos(quantGrupos*3);
 				} else {
@@ -333,7 +334,35 @@ public class UsuarioApi implements IUsuario {
 				
 		}
 		
-		return listaAmigosIDs;//AJEITAR ESSE RETURN
+		/*CRITERIO = COMENTÁRIO EM POST. Cada comentário vale 7 pts*/
+		Connection<Post> conPost = Cliente.getInstance().fetchConnection("me/feed", Post.class, Parameter.with("limit", 400));
+		List<Post> lisPost = conPost.getData();
+		IPost post = new PostApi();
+		
+		for (int i=0; i<lisPost.size(); i++) {
+			for (int j=0; j<lisPost.get(i).getComments().getData().size(); j++) {
+				String nome = lisPost.get(i).getComments().getData().get(j).getFrom().getName();
+				if (nome != null && !nome.equals("Larissa Batista Leite")) {
+					post.setUsuariosComent(nome);
+				}	
+			}
+		}
+		
+		
+		for (int i=0; i<post.getUsuariosComent().size(); i++) {
+			AmigoRanking amigo = ranking.amigoJaExisteNome(post.getUsuariosComent().get(i).toString());
+			if (amigo != null) {
+				amigo.setPontos(amigo.getPontos()+7);
+			} else {
+				amigo = new AmigoRanking();
+				amigo.setID(GerarGrafo.getInstance().searchVertexNome(nome).getId());
+				amigo.setNome(post.getUsuariosComent().get(i).toString());
+				amigo.setPontos(7);
+				ranking.getLista().add(amigo);
+			}
+		}
+		
+		return null;//AJEITAR ESSE RETURN
 		
 	}
 	

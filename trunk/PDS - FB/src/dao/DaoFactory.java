@@ -1,22 +1,26 @@
-package api;
+package dao;
 
 import java.io.IOException;
 
+
+
 import model.IUsuario;
+import model.Ranking;
 
 public abstract class DaoFactory {
 
 	public static final int Arquivo = 0;
 	
-	public abstract void criarUsuario(IUsuario usuario) throws IOException;
+	public abstract IDaoUsuario criarDaoUsuario();
 	
 	public static DaoFactory createDaoFactory(int factoryType) {
 		
 		switch (factoryType) {
 			case Arquivo:
-				return DaoUsuario.getInstance();
+				return DaoArquivo.getInstance();
 		}
 		
 		return null;
 	}
+
 }

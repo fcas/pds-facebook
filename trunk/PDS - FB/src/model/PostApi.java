@@ -6,31 +6,35 @@ import java.util.List;
 import com.restfb.types.Comment;
 
 public class PostApi implements IPost {
+
+	private List<String> usuariosComent = new ArrayList<String>();
 	
-	private String conteudo;
-	private List<IComentario> listaComentarios = new ArrayList<IComentario>();
-	
-	public void setConteudo(String conteudo) {
-		this.conteudo = conteudo;
+	@Override
+	public void setUsuariosComent(String nome) {
+		//if (!(usuariosComent.contains(nome))) {
+			usuariosComent.add(nome);
+		//}
+	}
+
+	public List<String> getUsuariosComent() {
+		return usuariosComent;
 	}
 	
-	public void setComentarios(List<Comment> comentario) {
-		for (int i=0; i<comentario.size(); i++) {
-			IComentario c = new ComentarioApi();
-			c.setMensagem(comentario.get(i).getMessage());
-			c.setUsuario(comentario.get(i).getFrom().getName());
-			listaComentarios.add(c);
+	public void organizarLista() {
+		for (int i=0; i<usuariosComent.size(); i++) {
+			if (quantidade(usuariosComent.get(i).toString()) < 3) {
+				usuariosComent.remove(i);
+			}
 		}
 	}
 	
-	@Override
-	public String getConteudo() {
-		return conteudo;
+	public int quantidade (String nome) {
+		int quant = 0;
+		for (int i=0; i<usuariosComent.size(); i++) {
+			if (usuariosComent.equals(nome))
+				quant++;
+		}
+		
+		return quant;
 	}
-
-	@Override
-	public List<IComentario> getComentarios() {
-		return listaComentarios;
-	}
-
 }

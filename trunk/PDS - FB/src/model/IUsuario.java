@@ -18,6 +18,7 @@ import tests.VerticeJaExisteException;
  * @author larissa
  */
 public interface IUsuario {
+	
     public String getAniversario();
 
 	public String getID();

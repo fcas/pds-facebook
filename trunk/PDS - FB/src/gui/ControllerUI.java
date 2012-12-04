@@ -10,10 +10,15 @@ import java.awt.CardLayout;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import javax.swing.JPanel;
+
+import api.Cliente;
+
+import dao.DaoFactory;
+
 import tests.ParDeVerticesNaoExistenteException;
 import tests.VerticeJaExisteException;
 
-import api.DaoFactory;
 
 import model.IUsuario;
 import model.Ranking;
@@ -22,18 +27,21 @@ import model.UsuarioApi;
 /**
  * @author larissa
  */
-public class Principal extends javax.swing.JFrame {
+public class ControllerUI extends javax.swing.JFrame {
 
     private static CardLayout cl;
     private static GerarGrafo gerarGrafo;
-    private static IUsuario usuarioLarissa;
     
-    public Principal() {
+    private static InfoUsuario infoUsuario = new InfoUsuario();
+    
+    private static Facade facade = new Facade();
+    
+    public ControllerUI() {
         initComponents();
         cl = new CardLayout();
         cardPanel.setLayout(cl);
         cardPanel.add(new TelaLogin(), "telalogin");
-        cardPanel.add(new InfoUsuario(), "infousuario");
+        cardPanel.add(infoUsuario, "infousuario");
         cardPanel.add(new AmigosNome(), "amigosnome");
         cardPanel.add(new AmigosInterajo(), "amigosinterajo");
         cardPanel.add(new PaginaPalavraChave(), "paginapalavrachave");
@@ -42,7 +50,14 @@ public class Principal extends javax.swing.JFrame {
         this.setResizable(false);
     }
 
-    public static void InfoUsuario() {
+    public static void InfoUsuario(String token, String usuario) {
+    	facade.setToken(token);
+    	facade.setUsuario(usuario);
+    	IUsuario u = facade.getUsuario();
+    	infoUsuario.setName(u.getNome());
+    	infoUsuario.setCidade(u.getCidadeNatal());
+    	infoUsuario.setSobre(u.getSobre());
+    	infoUsuario.setAniversario(u.getAniversario());
         cl.show(cardPanel, "infousuario");
     }
     
@@ -62,8 +77,8 @@ public class Principal extends javax.swing.JFrame {
         cl.show(cardPanel, "paginasrecomendadas");
     }
     
-    public static IUsuario getUsuario() {
-    	return usuarioLarissa;
+    public static Facade getFacade() {
+    	return facade;
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -112,26 +127,26 @@ public class Principal extends javax.swing.JFrame {
      * @throws FileNotFoundException 
      */
     public static void main(String args[]) throws FileNotFoundException, IOException, ParDeVerticesNaoExistenteException {
-    	
-//    	IUsuario usuarioFelipe = new UsuarioApi("felipecordeiroalves");
-    	usuarioLarissa = new UsuarioApi("larissabatistaleite");
-//    	IUsuario usuarioAnderson = new UsuarioApi("showrodrigues");
+
+
+    	//usuarioLarissa = new UsuarioApi("larissabatistaleite");
     	gerarGrafo = new GerarGrafo();
     	
-    	try {
-			usuarioLarissa.recomendarPaginas();
-			
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (VerticeJaExisteException e) {
-			e.printStackTrace();
-		} catch (ParDeVerticesNaoExistenteException e) {
-			e.printStackTrace();
-		}
     	
-    		
+//    	try {
+//			usuarioLarissa.buscarAmigosMaiorAfinidade();
+//		} catch (FileNotFoundException e) {
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		} catch (VerticeJaExisteException e) {
+//			e.printStackTrace();
+//		} catch (ParDeVerticesNaoExistenteException e) {
+//			e.printStackTrace();
+//		}
+//    	
+//    	DaoFactory factory = DaoFactory.createDaoFactory(0);
+//    	factory.criarRanking(usuarioLarissa.getRanking());
 //    	Ranking ranking = usuarioLarissa.getRanking();
 //    	for (int i=ranking.getLista().size()-1; i>-1; i--) {
 //    		System.out.println(ranking.getLista().get(i).getNome() + "  " + ranking.getLista().get(i).getPontos());
@@ -165,13 +180,13 @@ public class Principal extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ControllerUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ControllerUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ControllerUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ControllerUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -181,7 +196,7 @@ public class Principal extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {
-                new Principal().setVisible(true);
+                new ControllerUI().setVisible(true);
             }
         });
     }

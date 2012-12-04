@@ -26,12 +26,13 @@ import model.IUsuario;
 public class AmigosNome extends javax.swing.JPanel {
 	private static final long serialVersionUID = -8948068029080017044L;
 	
-	IUsuario usuario = Principal.getUsuario();
+	private Facade facade;
     /**
      * Creates new form AmigosNome
      */
     public AmigosNome() {
         initComponents();
+        facade = ControllerUI.getFacade();
         menu_amigosnome.setFont(menu_amigosinterajo.getFont().deriveFont(Font.BOLD));
         cliqueCelula();
     }
@@ -410,19 +411,19 @@ public class AmigosNome extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void menu_amigosnomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_amigosnomeActionPerformed
-        Principal.AmigosNome();
+        ControllerUI.AmigosNome();
     }//GEN-LAST:event_menu_amigosnomeActionPerformed
 
     private void menu_amigosinterajoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_amigosinterajoActionPerformed
-        Principal.AmigosInterajo();
+        ControllerUI.AmigosInterajo();
     }//GEN-LAST:event_menu_amigosinterajoActionPerformed
 
     private void menu_paginaspalavraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_paginaspalavraActionPerformed
-        Principal.PaginaPalavraChave();
+        ControllerUI.PaginaPalavraChave();
     }//GEN-LAST:event_menu_paginaspalavraActionPerformed
 
     private void menu_paginasrecomendadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_paginasrecomendadasActionPerformed
-        Principal.PaginasRecomendadas();
+        ControllerUI.PaginasRecomendadas();
     }//GEN-LAST:event_menu_paginasrecomendadasActionPerformed
     
     private void preencherTabela(List<Vertex> listaAmigos) {
@@ -441,7 +442,7 @@ public class AmigosNome extends javax.swing.JPanel {
     private void buscarActionPerformed(java.awt.event.ActionEvent evt) throws FileNotFoundException, IOException, VerticeJaExisteException, ParDeVerticesNaoExistenteException {//GEN-FIRST:event_buscarActionPerformed
         if (nome.getText().equals("")) {
         } else {
-            preencherTabela(usuario.buscarAmigos(nome.getText())); 
+            preencherTabela(facade.buscarAmigos(nome.getText())); 
         }
     }//GEN-LAST:event_buscarActionPerformed
     
