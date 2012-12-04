@@ -1,6 +1,6 @@
-package model;
+package model.rankings;
 
-public class AmigoRanking {
+public class Amigos {
 	private String ID;
 	private String nome;
 	private int pontos;

@@ -5,7 +5,7 @@ import java.io.IOException;
 
 
 import model.IUsuario;
-import model.Ranking;
+import model.rankings.RankingAmigos;
 
 public abstract class DaoFactory {
 

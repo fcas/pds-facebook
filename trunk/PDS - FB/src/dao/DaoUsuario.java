@@ -2,22 +2,26 @@ package dao;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 
-import model.AmigoRanking;
+import model.IPagina;
 import model.IUsuario;
-import model.Ranking;
+import model.rankings.Amigos;
+import model.rankings.RankingAmigos;
 
 public class DaoUsuario implements IDaoUsuario {
 	
 	private final String caminhoArquivo = System.getProperty("user.dir") + System.getProperty("file.separator");
 	private BufferedWriter arquivoId;
 	private BufferedWriter arquivoNome;
-	private BufferedWriter arquivoRanking;
+	private BufferedWriter arquivoRankingAmigos;
+	private BufferedWriter arquivoRankingPaginasRecomendadas;
 	
 	/*método que recebe o usuário para o qual os arquivos serão criados;
 	 * Não gostei muito do nome desse método, podemos pensar um melhor depois*/
@@ -43,30 +47,53 @@ public class DaoUsuario implements IDaoUsuario {
 		arquivoNome.close();
 	}
 	
-	public void criarRanking(Ranking ranking) throws IOException {
-		arquivoRanking = new BufferedWriter(new FileWriter(
+	public void criarRankingAmigos(RankingAmigos ranking) throws IOException {
+		arquivoRankingAmigos = new BufferedWriter(new FileWriter(
 				caminhoArquivo + "ranking.txt"));
 		System.out.println("Tamanho do ranking " + ranking.getLista().size());
 		for (int i=ranking.getLista().size()-1; i>-1; i--) {
 			System.out.println("ESCREVENDO NO ARQUIVO RANKING " + ranking.getLista().get(i).getNome());
-			arquivoRanking.write(ranking.getLista().get(i).getNome() + "\n");
-			arquivoRanking.write(ranking.getLista().get(i).getPontos() + "\n");
+			arquivoRankingAmigos.write(ranking.getLista().get(i).getNome() + "\n");
+			arquivoRankingAmigos.write(ranking.getLista().get(i).getPontos() + "\n");
 		}
 		
-		arquivoRanking.close();
+		arquivoRankingAmigos.close();
 	}
 
-	public Ranking getRanking() throws NumberFormatException, IOException {
-		Ranking ranking = new Ranking();
+	public RankingAmigos getRankingAmigos() throws NumberFormatException, IOException {
+		RankingAmigos ranking = new RankingAmigos();
 		BufferedReader rankingReader = new BufferedReader(new FileReader(caminhoArquivo+"ranking.txt"));
         while(rankingReader.ready()) {
-        	AmigoRanking amigo = new AmigoRanking();
+        	Amigos amigo = new Amigos();
         	amigo.setNome(rankingReader.readLine());
         	amigo.setPontos(Integer.parseInt(rankingReader.readLine()));
         	ranking.getLista().add(amigo);
         }
         
         return ranking;
+	}
+
+	@Override
+	public void criarRankingPaginasRecomendadas(List<IPagina> listaPaginas) throws IOException {
+		arquivoRankingPaginasRecomendadas = new BufferedWriter(new FileWriter(
+				caminhoArquivo + "rankingPaginas.txt"));
+		for (int i=listaPaginas.size()-1; i>-1; i--) {
+			arquivoRankingPaginasRecomendadas.write(listaPaginas.get(i).getNome() + "\n");
+		}
+		
+		arquivoRankingPaginasRecomendadas.close();
+		
+	}
+
+	@Override
+	public List<String> getRankingPaginasRecomendadas() throws IOException {
+		List<String> paginasRecomendadas = new ArrayList<String>();
+		BufferedReader rankingReader = new BufferedReader(new FileReader(caminhoArquivo+"rankingPaginas.txt"));
+        while(rankingReader.ready()) {
+        	paginasRecomendadas.add(rankingReader.readLine());
+        }
+        
+        return paginasRecomendadas;
 	}
 
 }

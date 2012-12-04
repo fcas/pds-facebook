@@ -4,6 +4,8 @@
  */
 package model;
 
+import java.util.List;
+
 
 /**
  *
@@ -21,5 +23,6 @@ public interface IPagina {
     public String getCategoria();
     public long getLikes();
     public String getLink();
+    public List<IPagina> buscarPaginasPalavraChave(String palavra);
     
 }

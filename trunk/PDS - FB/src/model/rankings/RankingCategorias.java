@@ -1,4 +1,4 @@
-package model;
+package model.rankings;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -6,22 +6,22 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
-public class ListaCategoriaRanking {
+public class RankingCategorias {
 	
-	List<CategoriaRanking> listaCategoria;
+	private List<Categorias> listaCategoria;
 	
-	public ListaCategoriaRanking() {
-		listaCategoria = new ArrayList<CategoriaRanking>();
+	public RankingCategorias() {
+		listaCategoria = new ArrayList<Categorias>();
 	}
 	
-	public List<CategoriaRanking> getListaCategoria() {
+	public List<Categorias> getListaCategoria() {
 		return listaCategoria;
 	}
 	
-	private CategoriaRanking buscaCategoriaRanking(String categoria){
-		CategoriaRanking categoriaRanking = null;
+	private Categorias buscaCategoriaRanking(String categoria){
+		Categorias categoriaRanking = null;
 		String stringComparada = null;
-		Iterator<CategoriaRanking> iterator = listaCategoria.iterator();
+		Iterator<Categorias> iterator = listaCategoria.iterator();
 		
 		while (iterator.hasNext()) //enquanto houver elementos na lista
 		{
@@ -34,20 +34,20 @@ public class ListaCategoriaRanking {
 	}
 	
 	public void adicionaCategoria (String categoria) {
-		CategoriaRanking categoriaRanking = buscaCategoriaRanking(categoria);
+		Categorias categoriaRanking = buscaCategoriaRanking(categoria);
 		
 		if (categoriaRanking != null){
 			categoriaRanking.incrementadorCategoriaRanking();
 		}else{
-			CategoriaRanking addCategoria = new CategoriaRanking(categoria);
+			Categorias addCategoria = new Categorias(categoria);
 			listaCategoria.add(addCategoria);
 		}
 	}
 	
 	public void ordenarRanking() {
-        Collections.sort(listaCategoria, new Comparator<CategoriaRanking>() {  
+        Collections.sort(listaCategoria, new Comparator<Categorias>() {  
             @Override  
-            public int compare(CategoriaRanking o1, CategoriaRanking o2) {  
+            public int compare(Categorias o1, Categorias o2) {  
                 return o1.getContador().compareTo(o2.getContador());
             }  
         }				);

@@ -17,16 +17,19 @@ import dao.IDaoUsuario;
 
 import model.IPagina;
 import model.IUsuario;
-import model.Ranking;
+import model.PaginaApi;
 import model.UsuarioApi;
+import model.rankings.RankingAmigos;
 
 public class Facade {
 	
 	private IUsuario usuario;
+	private IPagina pagina;
 	private DaoFactory factory = DaoFactory.createDaoFactory(0);
 	private IDaoUsuario daoUsuario = factory.criarDaoUsuario();
 	
 	public Facade () {
+		pagina = new PaginaApi();
 	}
 	
 	public void setUsuario(String usuario) {
@@ -57,11 +60,11 @@ public class Facade {
 		return null;
 	}
 	
-	public Ranking rankingNomes () {
-		Ranking ranking = null;
+	public RankingAmigos rankingNomes () {
+		RankingAmigos ranking = null;
 		
 		try {
-			ranking = daoUsuario.getRanking();
+			ranking = daoUsuario.getRankingAmigos();
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -72,16 +75,26 @@ public class Facade {
 	}
 	
 	public List<IPagina> buscarPaginasRecomendadas() {
+		try {
+			return usuario.recomendarPaginas();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (VerticeJaExisteException e) {
+			e.printStackTrace();
+		} catch (ParDeVerticesNaoExistenteException e) {
+			e.printStackTrace();
+		}
+		
 		return null;
 	}
 
 	public List<IPagina> buscarPaginasPalavraChave(String palavra) {
-		return usuario.buscarPaginasPalavraChave(palavra);
+		return pagina.buscarPaginasPalavraChave(palavra);
 	}
 	
-	public Ranking getRanking() {
+	public RankingAmigos getRanking() {
 		try {
-			return daoUsuario.getRanking();
+			return daoUsuario.getRankingAmigos();
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -99,11 +112,31 @@ public class Facade {
 		}
 	}
 	
-	public void criarRanking() {
+	public void criarRankingAmigos() {
 		try {
-			daoUsuario.criarRanking(usuario.getRanking());
+			daoUsuario.criarRankingAmigos(usuario.getRanking());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void criarRankingPaginas() {
+		try {
+			daoUsuario.criarRankingPaginasRecomendadas(buscarPaginasRecomendadas());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public List<String> getRankingPaginas() {
+		try {
+			return daoUsuario.getRankingPaginasRecomendadas();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
 	}
 }

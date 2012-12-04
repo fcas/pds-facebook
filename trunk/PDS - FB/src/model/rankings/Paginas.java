@@ -1,10 +1,12 @@
-package model;
+package model.rankings;
 
-public class PaginaRanking {
+import model.IPagina;
+
+public class Paginas {
 	private IPagina pagina;
 	private int popularidade;
 	
-	public PaginaRanking(IPagina pagina) {
+	public Paginas(IPagina pagina) {
 		this.pagina = pagina;
 		popularidade = 1;
 	}

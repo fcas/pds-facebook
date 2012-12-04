@@ -10,6 +10,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
+import model.rankings.RankingAmigos;
+
 import tests.ParDeVerticesNaoExistenteException;
 import tests.VerticeJaExisteException;
 
@@ -38,8 +40,6 @@ public interface IUsuario {
 	public String getStatusRelacionamento();
       
     public List<IPagina> buscarPaginasCurtidas();
-       
-    public List<IPagina> buscarPaginasPalavraChave(String palavra);
 
 	public List<IUsuario> getAmigos();
 	
@@ -47,11 +47,15 @@ public interface IUsuario {
 	
 	public List<String> getAmigosNomes();
 	
-	public Ranking getRanking();
+	public RankingAmigos getRanking();
 	
 	public List<Vertex> buscarAmigos(String nome) throws FileNotFoundException, IOException, VerticeJaExisteException, ParDeVerticesNaoExistenteException;//ajeitar o nome
 
-	public List<String> buscarAmigosMaiorAfinidade() throws FileNotFoundException, IOException, VerticeJaExisteException, ParDeVerticesNaoExistenteException;
+	public RankingAmigos buscarAmigosMaiorAfinidade() throws FileNotFoundException, IOException, VerticeJaExisteException, ParDeVerticesNaoExistenteException;
 
 	public List<IPagina> recomendarPaginas() throws IOException, VerticeJaExisteException, ParDeVerticesNaoExistenteException;
+
+	public List<Vertex> sugerirAmigos(String nome) throws FileNotFoundException, IOException, VerticeJaExisteException, ParDeVerticesNaoExistenteException;
+	
+	
 }

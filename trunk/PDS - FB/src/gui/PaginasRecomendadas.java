@@ -5,6 +5,11 @@
 package gui;
 
 import java.awt.Font;
+import java.util.List;
+
+import javax.swing.JOptionPane;
+
+import model.rankings.RankingAmigos;
 
 /**
  *
@@ -13,13 +18,15 @@ import java.awt.Font;
 public class PaginasRecomendadas extends javax.swing.JPanel {
 	private static final long serialVersionUID = -8147668607750120493L;
 	
+	private Facade facade;
 	/**
      * Creates new form PaginasRecomendadas
      */
     public PaginasRecomendadas() {
         initComponents();
         menu_paginasrecomendadas.setFont(menu_amigosinterajo.getFont().deriveFont(Font.BOLD));
-
+        facade = ControllerUI.getFacade();
+        preencherTabela();
     }
 
     /**
@@ -186,10 +193,18 @@ public class PaginasRecomendadas extends javax.swing.JPanel {
                 {null, null},
                 {null, null},
                 {null, null},
-                {null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}      
             },
             new String [] {
-                "Nome", "Aniversário"
+                "Nome", "Link"
             }
         ) {
             @SuppressWarnings("rawtypes")
@@ -284,6 +299,28 @@ public class PaginasRecomendadas extends javax.swing.JPanel {
         ControllerUI.PaginasRecomendadas();
     }//GEN-LAST:event_menu_paginasrecomendadasActionPerformed
 
+    private void preencherTabela() {
+
+    	limparTabela();
+    	List<String> ranking = facade.getRankingPaginas();
+        if (ranking == null) {
+           JOptionPane.showMessageDialog(this, "Nenhum nome encontrado!");
+        } else {
+            for (int i=0; i< 23; i++) {
+                    jTable1.setValueAt(ranking.get(i).toString(), i, 0);
+                    //jTable1.setValueAt("www.facebook.com/" + ranking.getLista().get(i).getID(), i, 1);
+            }
+        }
+        
+    }
+        
+    private void limparTabela() {
+        for (int i=0; i<jTable1.getRowCount(); i++) {
+            jTable1.setValueAt("", i, 0);
+            jTable1.setValueAt("", i, 1);
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;

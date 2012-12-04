@@ -25,6 +25,10 @@ public abstract class AbstractGraph implements Graph {
 		}
 		depthFirstTraversal(visitor, listVertex.get(start), visited, list);
 	}
+	
+	public List<Vertex> getListVertex() {
+		return this.listVertex;
+	}
 
 	/**
 	 * Percorre o grafo em profundidade chamando o metodo accept de todos os

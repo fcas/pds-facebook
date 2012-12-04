@@ -19,7 +19,7 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
-import model.Ranking;
+import model.rankings.RankingAmigos;
 
 import tests.ParDeVerticesNaoExistenteException;
 import tests.VerticeJaExisteException;
@@ -394,7 +394,7 @@ public class AmigosInterajo extends javax.swing.JPanel {
     private void preencherTabela() {
 
     	limparTabela();
-    	Ranking ranking = facade.getRanking();
+    	RankingAmigos ranking = facade.getRanking();
         if (ranking == null) {
            JOptionPane.showMessageDialog(this, "Nenhum nome encontrado!");
         } else {
