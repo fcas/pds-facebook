@@ -12,12 +12,14 @@ package model;
 public interface IPagina {
    
     public void setNome (String nome);
+    public void setID(String ID);
     public void setCategoria (String categoria);
-    public void setLikes (String likes);
+    public void setLikes (long likes);
     public void setLink (String link);
     public String getNome();
+    public String getID();
     public String getCategoria();
-    public String getLikes();
+    public long getLikes();
     public String getLink();
     
 }
