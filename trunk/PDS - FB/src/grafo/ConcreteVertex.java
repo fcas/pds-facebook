@@ -2,9 +2,6 @@ package grafo;
 
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.List;
-
-import model.IPagina;
 
 import visitor.Visitable;
 import visitor.Visitor;
@@ -31,7 +28,6 @@ public class ConcreteVertex implements Vertex, Visitable {
 
 	@Override
 	public String getId() {
-		// TODO Auto-generated method stub
 		return id;
 	}
 	
@@ -49,7 +45,6 @@ public class ConcreteVertex implements Vertex, Visitable {
 
 	@Override
 	public Iterator<Vertex> getVizinhosIterador() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 }

@@ -1,12 +1,5 @@
 package dao;
 
-import java.io.IOException;
-
-
-
-import model.IUsuario;
-import model.rankings.RankingAmigos;
-
 public abstract class DaoFactory {
 
 	public static final int Arquivo = 0;

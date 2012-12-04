@@ -2,7 +2,6 @@ package dao;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -23,8 +22,7 @@ public class DaoUsuario implements IDaoUsuario {
 	private BufferedWriter arquivoRankingAmigos;
 	private BufferedWriter arquivoRankingPaginasRecomendadas;
 	
-	/*método que recebe o usuário para o qual os arquivos serão criados;
-	 * Não gostei muito do nome desse método, podemos pensar um melhor depois*/
+	/*metodo que recebe o usuario para o qual os arquivos serao criados;*/
 	public void criarUsuario(IUsuario usuario) throws IOException {
 		List<IUsuario> amigos = usuario.getAmigos();
 		
@@ -38,7 +36,6 @@ public class DaoUsuario implements IDaoUsuario {
 		arquivoNome.write(usuario.getUsername() + "\n");
 		
 		for (int i=0; i<amigos.size(); i++) {
-			//System.out.println("Inserindo no arquivo: " + amigos.get(i).getID() + "   " +  amigos.get(i).getNome());
 			arquivoId.write(amigos.get(i).getID() + "\n");
 			arquivoNome.write(amigos.get(i).getNome() + "\n");
 		}	
@@ -70,6 +67,7 @@ public class DaoUsuario implements IDaoUsuario {
         	ranking.getLista().add(amigo);
         }
         
+        rankingReader.close();
         return ranking;
 	}
 
@@ -93,6 +91,7 @@ public class DaoUsuario implements IDaoUsuario {
         	paginasRecomendadas.add(rankingReader.readLine());
         }
         
+        rankingReader.close();
         return paginasRecomendadas;
 	}
 

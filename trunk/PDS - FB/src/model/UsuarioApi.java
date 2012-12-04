@@ -6,8 +6,6 @@ package model;
 
 import api.Cliente;
 import com.restfb.Connection;
-import com.restfb.DefaultFacebookClient;
-import com.restfb.FacebookClient;
 import com.restfb.Parameter;
 import com.restfb.types.Group;
 import com.restfb.types.Page;
@@ -23,7 +21,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ListIterator;
 
 import model.rankings.Amigos;
 import model.rankings.Categorias;
@@ -310,7 +307,7 @@ public class UsuarioApi implements IUsuario {
 				
 		}
 		
-		/*CRITERIO = COMENTÁRIO EM POST. Cada comentário vale 7 pts*/
+		/*CRITERIO = COMENTARIO EM POST. Cada comentario vale 7 pts*/
 		Connection<Post> conPost = Cliente.getInstance().fetchConnection("me/feed", Post.class, Parameter.with("limit", 400));
 		List<Post> lisPost = conPost.getData();
 		IPost post = new PostApi();
@@ -422,21 +419,21 @@ public class UsuarioApi implements IUsuario {
 	        	{
 	        		System.out.println("v = " + v.getName());
 	        		/*
-	        		 * Cria uma lista completa de p�ginas que os amigos do ranking curtem.
-	        		 * Em seguida, verifica quais dessas p�ginas o usu�rio j� curte.
-	        		 * Ap�s, verifica quais dessas p�ginas s�o pouco populares e as remove da lista.  
+	        		 * Cria uma lista completa de paginas que os amigos do ranking curtem.
+	        		 * Em seguida, verifica quais dessas paginas o usuario ja curte.
+	        		 * Apos, verifica quais dessas paginas sao pouco populares e as remove da lista.  
 	        		 */
-	        		List<IPagina> paginasAmigo = buscarPaginasAmigo(v.getId()); //lista auxiliar de p�ginas. Pega as p�ginas que "v" curte
-	        		for (int i=0; i<paginasCurtidas.size(); i++) //para cada p�gina que o usu�rio curte
+	        		List<IPagina> paginasAmigo = buscarPaginasAmigo(v.getId()); //lista auxiliar de paginas. Pega as paginas que "v" curte
+	        		for (int i=0; i<paginasCurtidas.size(); i++) //para cada pagina que o usuario curte
 	        		{
-	        			if (paginasAmigo.contains(paginasCurtidas.get(i))) //se o usu�rio j� curte a mesma p�gina que o amigo
-	        				paginasAmigo.remove(paginasCurtidas.get(i)); //essa p�gina n�o ser� sugerida.
+	        			if (paginasAmigo.contains(paginasCurtidas.get(i))) //se o usuario j� curte a mesma pagina que o amigo
+	        				paginasAmigo.remove(paginasCurtidas.get(i)); //essa pagina n�o ser� sugerida.
 	        		}
 	        		
-	        		for (int i=0; i<paginasAmigo.size(); i++) //para cada p�gina restante na lista de amigos
+	        		for (int i=0; i<paginasAmigo.size(); i++) //para cada pagina restante na lista de amigos
 	        		{
 	        			
-	        			if (paginasAmigo.get(i).getLikes() >= 3000) //se essa p�gina tem "LIMITE_CURTIDAS" curtidas,
+	        			if (paginasAmigo.get(i).getLikes() >= 3000) //se essa pagina tem "LIMITE_CURTIDAS" curtidas,
 	        			{
 	        				listaRanking.adicionaPagina(paginasAmigo.get(i));
 	        			}
@@ -452,19 +449,19 @@ public class UsuarioApi implements IUsuario {
 	
 	@Override
 	public List<IPagina> recomendarPaginas() throws IOException, VerticeJaExisteException, ParDeVerticesNaoExistenteException {
-    	List<IPagina> paginasRecomendadas = new ArrayList<IPagina>(); //lista de p�ginas recomendadas para o usu�rio
+    	List<IPagina> paginasRecomendadas = new ArrayList<IPagina>(); //lista de paginas recomendadas para o usuario
     	RankingPaginas listaRanking = paginasAmigosRanking();
         
         /*
          * Ordenar por categoria 
          */
         
-        List<String> categoriasMaisCurtidas = this.categoriasMaisCurtidas(); //verifica categorias que o usu�rio mais se interessa
+        List<String> categoriasMaisCurtidas = this.categoriasMaisCurtidas(); //verifica categorias que o usuario mais se interessa
         
-        listaRanking.aplicarCategoriasMaisCurtidas(categoriasMaisCurtidas); //aplica o �ndice de categorias 
-        listaRanking.ordenarRanking(); //ordena baseado nos novos �ndices
+        listaRanking.aplicarCategoriasMaisCurtidas(categoriasMaisCurtidas); //aplica o indice de categorias 
+        listaRanking.ordenarRanking(); //ordena baseado nos novos indices
         
-        //adicionar p�ginas ordenadas � lista de p�ginas recomendadas
+        //adicionar paginas ordenadas a lista de paginas recomendadas
         List<Paginas> aux = listaRanking.getListaPagina();
 		for (int i = 0; i < aux.size(); i++){
         	paginasRecomendadas.add(aux.get(i).getPagina());
