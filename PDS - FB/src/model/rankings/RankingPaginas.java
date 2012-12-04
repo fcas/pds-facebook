@@ -47,7 +47,7 @@ public class RankingPaginas {
 	}
 	
 	public void ordenarRanking() {
-		System.out.println("Ordenando p�ginas...");
+		System.out.println("Ordenando paginas...");
         Collections.sort(listaPagina, new Comparator<Paginas>() {
             @Override  
             public int compare(Paginas o1, Paginas o2) {  
@@ -55,7 +55,7 @@ public class RankingPaginas {
             }  
         }				);
         
-        System.out.println("P�ginas ordenadas.");
+        System.out.println("Paginas ordenadas.");
 	}
 	
 	/**
@@ -63,7 +63,7 @@ public class RankingPaginas {
 	 * @param listaStrings Lista de Strings contendo as categorias mais curtidas pelo usu�rio
 	 */
 	public void aplicarCategoriasMaisCurtidas(List<String> listaStrings){
-		System.out.println("Aplicando �ndices de categoria...");
+		System.out.println("Aplicando indices de categoria...");
 		Paginas paginaRanking = null;
 		Iterator<Paginas> iterator = listaPagina.iterator();
 		
@@ -76,7 +76,7 @@ public class RankingPaginas {
 					 paginaRanking.incrementadorCategoria(); //aplicar �ndice.
 			}
 		}
-	System.out.println("�ndices de categoria aplicados.");
+	System.out.println("indices de categoria aplicados.");
 	}
 	
 	
