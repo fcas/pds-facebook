@@ -26,7 +26,7 @@ public class Cliente {
         if (facebookClient == null)
             facebookClient = new DefaultFacebookClient(token);
         
-        return facebookClient;
+        return facebookClient
     }
     
     public static void setToken(String usuario_token) {
